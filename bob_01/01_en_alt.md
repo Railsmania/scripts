@@ -42,41 +42,34 @@ If we save now, restart our rails server, and view the project in our browser --
 
 Great, now it's time to add our bootstrap theme. Most bootstrap themes come with example HTML and all the CSS and Javascript nestled away in subfolders following different naming conventions. That's not a problem for us.
 
-All we have to do is move our CSS to the assets/stylesheets/ directory.
+All we have to do is move our CSS to the assets/stylesheets/ directory. Any minified css we'll discard as long as we have the unminified version.
 
-Move the javascript to assets/javascripts/
+Then move the javascript to assets/javascripts/. Just like the stylesheets, any minified javascript we'll discard as long as we have the unminified version.
 
-Move any images to assets/images/
+And move any images to assets/images/
 
-And if you have any custom fonts, just make a directory inside assets/ named fonts and put them there. Simple!
+Finally, if you have any custom fonts, just make a directory inside assets/ named fonts and put them there. Simple!
 
 Ok, now we need to decide where to put this main theme file. I prefer keeping the original application layout file as simple and clean as possible - just to make it easier to swap out themes in different parts of my application. The only thing I want to do in the app/views/layouts/application.html.erb is to move the javascript include tag below to the bottom of the page, right above the closing body tag.
 
-Then I'm going to take all the body content from our bootstrap theme demo file -- excluding the javascript tags at the bottom --, copy it, and paste it into the /app/views/dashboards/index.html.erb
+Then take all the body content from our bootstrap theme demo file -- excluding the javascript tags at the bottom --, copy it, and paste it into the /app/views/dashboards/index.html.erb
 
 Save it, then refresh our application in the browser. Wow, looks great, but there are a few things missing. Using our browser's developer tools we can see what's broken. Knowing how to fix it is a little more tricky, but here's the quick answers:
 
-FontAwesome's css file needs to be converted to an erb file. A file that is an ERB will be processed by Rails as if it were a view file -- executing the ruby code inside before serving it as as a static asset. Here we need to fix some paths using a Rails path helper:
+FontAwesome's css file needs to be converted to an erb file, so we can fix some paths using a Rails path helper:
 
 ```
   src: url('<%= asset_path("fontawesome-webfont.eot") %>?v=4.1.0');
   src: url('<%= asset_path("fontawesome-webfont.eot") %>?#iefix&v=4.1.0') format('embedded-opentype'), url('<%= asset_path("fontawesome-webfont.woff") %>?v=4.1.0') format('woff'), url('<%= asset_path("fontawesome-webfont.ttf") %>?v=4.1.0') format('truetype'), url('<%= asset_path("fontawesome-webfont.svg") %>?v=4.1.0#fontawesomeregular') format('svg');
 
-```
+````
 
---------------------
-### Here need to review ...
+Next, we need to fix some of the javascript. We'll stub 2 javascript files that are showing errors in our browser's developer tools console. These two files are demo files for the theme we downloaded, we're going to turn them off by using this stub keyword -- that will leave them in the project so we can reuse them later, stubbing just tells Rails to ignore them.
 
-Next, we need to fix some of the javascript and css. We'll stub 2 css files. Stubbing tells Rails to ignore them, we don't actually need them for now.
+Now, refreshing our project in our browser shows no errors and everything appears to be here.
 
-In app/assets/stylesheets/application.css we'll add these special, magical rather, comments that will tell Rails not to load these files.
+That's it for this lesson, be sure to watch the additional related content and advanced topics we are sharing on RailsMania.com.
 
-```
- *= stub bootstrap
- *= stub bootstrap.css.map
-```
+--------
+### Easter Egg
 
-And in the app/assets/javascripts/application.js file we'll need to stub the following 
-So, we need to do a little clean up.
-
-Looking in our new project, we see that there is already a views/layouts/application.html.erb available for us.
