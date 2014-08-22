@@ -64,7 +64,14 @@ FontAwesome's css file needs to be converted to an erb file, so we can fix some 
 
 ````
 
-Next, we need to fix some of the javascript. We'll stub 2 javascript files that are showing errors in our browser's developer tools console. These two files are demo files for the theme we downloaded, we're going to turn them off by using this stub keyword -- that will leave them in the project so we can reuse them later, stubbing just tells Rails to ignore them.
+Next, we need to fix some of the javascript. We'll stub 2 javascript files that are showing errors in our browser's developer tools console. These two files are demo files for the theme we downloaded, we're going to turn them off by using this stub keyword.
+
+```
+//= stub plugins/flot/flot-data
+//= stub plugins/dataTables/dataTables.bootstrap
+```
+
+That will leave them in the project so we can reuse them later, stubbing just tells Rails to ignore them.
 
 Now, refreshing our project in our browser shows no errors and everything appears to be here.
 
