@@ -29,7 +29,7 @@ Rails comes from installing useful gems which provide functionality to
 your application. We will teach you how to find, install and use gems in
 your projects. 
 
-###(close Gemfile)
+#####(close Gemfile)
 
 # Bundler
 When we modify the Gemfile , we must execute the command 
@@ -46,7 +46,7 @@ bundle execute rails server
 This command starts a web server that will serve the default
 rails page when accesed with a browser. The default landing page is not very interesting but we know our project is working properly.  
 
-### (Close browser)
+##### (Close browser)
 
 The next important directory is config/  All the configuration files for your
 project are contained here. For now we can safely use the defaults. We'll explain each file in future lessons as we need to modify them.
@@ -64,6 +64,7 @@ any path. The ‘wellcome#index’ format indicates the welcome controller,
 index action. Meaning, when the user comes to the root url of
 your site the index action of the welcome controller will be called.
 
+# Controllers and Actions
 So what is an action? What is a controller?
 
 Back to the filesystem we can see an app directory.  Most of what is
@@ -74,13 +75,6 @@ under app.
 
 So when a user visits our application on any given url, Rails
 will first look at the config/routes.rb file to determine which controller will handle the request from the user.
-
-//
-//Typically the controller will need to gather some data to show to the
-//user, that data is managed by the models and the data is displayed
-//inside some HTML, this is the view.
-//In this lesson we do not have any data so we will only present the
-//controllers and the views directories.
 
 We configured config/routes.rb to use the welcome controller , let’s
 create that file (create proper file).
@@ -108,6 +102,7 @@ Now the controller is ready, this method will be called but we don’t
 have anything to give back. We still need to have a view to send to the
 user’s browser.
 
+# Views
 We have an app/views directory where all the views live. By convention a
 controller renders views from a directory with the same name. So let’s
 create a welcome directory.
