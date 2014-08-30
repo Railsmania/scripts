@@ -17,13 +17,13 @@ video we will explain only the most important files.
 # Gemfile
 The first file we want to focus on is the Gemfile.
 
-In the Gemfile we define all the software our application depends on.
+In the Gemfile we define all the software our application depends upon.
 
 ###(open Gemfile) 
 Ruby software usually is packed in Gems. The Gemfile is
 a list of all the gems our Rails project uses.
 We can see for instance that we even define the Rails version our
-project depends on.
+project depends upon.
 We can see there are many other gems in this file. Most of the power of
 Rails comes from installing useful gems which provide functionality to
 your application. We will teach you how to find, install and use gems in
@@ -39,7 +39,7 @@ this will download and install all the software
 defined in the Gemfile and will be available in our project.
 
 # Webrick
-Even though we just generated our project, we can already launch a web server with our application. Make sure you are in your project's directory. Then in the terminal run:
+Even though we just generated our project, we can already launch a web server with our application. Make sure you are in your project's directory. Then, in the terminal,  run:
 
 bundle execute rails server
 
@@ -48,6 +48,7 @@ rails page when accesed with a browser. The default landing page is not very int
 
 ##### (Close browser)
 
+# Config/routes
 The next important directory is config/  All the configuration files for your
 project are contained here. For now we can safely use the defaults. We'll explain each file in future lessons as we need to modify them.
 
@@ -67,14 +68,14 @@ your site the index action of the welcome controller will be called.
 # Controllers and Actions
 So what is an action? What is a controller?
 
-Back to the filesystem we can see an app directory.  Most of what is
+Well, back to the filesystem we can see an app directory.  Most of what is
 identified with a Rails application is inside this directory.
 Rails follows an architecture called MVC for Model-View-Controller. We
 can see that we have subdirectories for models, views and controllers
 under app.
 
 So when a user visits our application on any given url, Rails
-will first look at the config/routes.rb file to determine which controller will handle the request from the user.
+will first look at the config/routes.rb file to determine which controller will handle the request for the user.
 
 We configured config/routes.rb to use the welcome controller , let’s
 create that file (create proper file).
@@ -86,7 +87,7 @@ class WelcomeController < ApplicationController
 end
 
 
-in the config/routes.rb we wrote ‘welcome#index’ meaning the index
+In the config/routes.rb we wrote ‘welcome#index’ meaning the index
 action inside the welcome controller.
 
 To create a new action, we just create a new Ruby method:
@@ -104,7 +105,7 @@ user’s browser.
 
 # Views
 We have an app/views directory where all the views live. By convention a
-controller renders views from a directory with the same name. So let’s
+controller renders views from a directory with the same name as the controller. So let’s
 create a welcome directory.
 
 Now we need to create an index view. Just create a index.html.erb
@@ -117,7 +118,7 @@ Let’s restart our rails server by going to the terminal and executing the
 bundle exec rails server
 command
 
-Now we can reopen a browser tab to the our project tab and there we can see our first Hello World webpage through Ruby on Rails!
+Now we can reopen a browser tab to our project tab and there we can see our first Hello World webpage through Ruby on Rails!
 
 
 That’s all for this lesson, we encourage you to explore the other files
