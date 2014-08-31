@@ -9,9 +9,11 @@ que nos permitiran verificar que estamos construyendo funcionalidad que hace exa
 3
 00:00:08,000 --> 00:00:12,000
 Si no sabes lo que es el desarrollo guiado por comportamiento
+
 4
 00:00:12,000 --> 00:00:16,000
 o el desarrollo guiado por test, puedes aprender mas en
+
 5
 00:00:16,000 --> 00:00:20,000
 las notas de esta lección. En esta lección vamos a hacer algo muy simple
