@@ -21,15 +21,15 @@ En las lecciones a menudo vamos a utilizar comandos de Rails en la terminal. Por
 ```
 rails new new_project
 ```
-Puedes ver cómo la vista de archivos se actualiza automáticamente con el nuevo proyecto que creó Rails.
+La vista de archivos se actualiza automáticamente con el nuevo proyecto que creó Rails.
 
-Ahora podemos pasar a este nuevo directorio utilizando estándar * nix como comandos
+Ahora podemos pasar a este nuevo directorio utilizando estándar comandos *nix como
 ```
-cd nuevo_proyecto
+cd new_project
 ```
 y listar los ficheros con
 ```
 ls
 ```
 
-Eso es todo en este video. Esperamos que este entorno de desarrollo sea a la vez simple y útil.
+Eso es todo en este video. Esperamos que este entorno de desarrollo te resulte simple y útil.
