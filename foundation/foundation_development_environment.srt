@@ -1,0 +1,128 @@
+﻿1
+00:00:00,000 --> 00:00:04,000
+Hi! In this video, I'm going to explain very quickly how to work
+
+2
+00:00:04,000 --> 00:00:08,000
+with our online development environment. The development environment has
+
+3
+00:00:08,000 --> 00:00:12,000
+just the right amount of functionality needed to help you develop your applications
+
+4
+00:00:12,000 --> 00:00:16,000
+without being overly complicated.
+
+5
+00:00:16,000 --> 00:00:20,000
+On the left we have the files view. Every account comes with a workspace directory.
+
+6
+00:00:20,000 --> 00:00:24,000
+We can click on that directory to expand it. To open a file, simply
+
+7
+00:00:24,000 --> 00:00:28,000
+click on it once.
+
+8
+00:00:28,000 --> 00:00:32,000
+If you right click on a directory, you can see an option to add files or to add directories.
+
+9
+00:00:32,000 --> 00:00:36,000
+Choosing either of these options will allow you to select files from your local machine to upload.
+
+10
+00:00:36,000 --> 00:00:40,000
+You can select one or more files and click ok, and it will upload them
+
+11
+00:00:40,000 --> 00:00:44,000
+to your workspace.
+
+12
+00:00:44,000 --> 00:00:48,000
+In our development environment, you'll have plenty of space to host all the files you need for a
+
+13
+00:00:48,000 --> 00:00:52,000
+typical Rails application.
+
+14
+00:00:52,000 --> 00:00:56,000
+The main part of the window, on the right side, is used by the editor view.
+
+15
+00:00:56,000 --> 00:01:00,000
+It's an easy to use, simple code editor with syntax highlighting for Ruby.
+
+16
+00:01:00,000 --> 00:01:04,000
+When we modify any file, you will see this mark.
+
+17
+00:01:04,000 --> 00:01:08,000
+Indicating that the file is not yet saved.
+
+18
+00:01:08,000 --> 00:01:12,000
+To save the file, select [ Editor - Save ] from the menu bar.
+
+19
+00:01:12,000 --> 00:01:16,000
+Or use the standard shortcut keys to save, such as Ctrl+S on Windows or
+
+20
+00:01:16,000 --> 00:01:20,000
+Cmd+S on Mac.
+
+21
+00:01:20,000 --> 00:01:24,000
+The file will be saved in our cloud environment and will be accessible from any of your devices.
+
+22
+00:01:24,000 --> 00:01:28,000
+The last important component is the terminal view.
+
+23
+00:01:28,000 --> 00:01:32,000
+Our development environment gives you access to a Linux Debian environment
+
+24
+00:01:32,000 --> 00:01:36,000
+with full privileges. You have access to all the commands you may need.
+
+25
+00:01:36,000 --> 00:01:40,000
+In the lesson we will often use the "Rails" commands in the terminal, for instance:
+
+26
+00:01:40,000 --> 00:01:44,000
+we can execute Rails new such as "rails new new_project"
+
+27
+00:01:44,000 --> 00:01:48,000
+and you can see how the files view automatically updated its contents
+
+28
+00:01:48,000 --> 00:01:52,000
+with the new project that Rails created.
+
+29
+00:01:52,000 --> 00:01:56,000
+Now we can move to this new directory using standard *Nix
+
+30
+00:01:56,000 --> 00:02:00,000
+commands like "cd new_project" and list the
+
+31
+00:02:00,000 --> 00:02:04,000
+files with "ls"
+
+32
+00:02:04,000 --> 00:02:09,333
+So that's it for this video, we hope you find this development environment both simple and useful.
+
