@@ -33,11 +33,14 @@ environment gives you access to a Linux Debian system with full
 privileges. You have access to all the commands you may need. 
 
 In the lessons we will often use the rails commands in the terminal. For instance
-we can execute rails new (rails new new_project). You can see how the
-file view automatically updated its contents with the new project that rails created.
+we can execute rails new such as
+```
+rails new new_project
+```
+You can see how the file view automatically updated its contents with the new project that rails created.
 
 Now we can move to this
-new directory by using standard nix commands like (cd new_project) and list the files with (ls). 
+new directory by using standard *nix commands like (cd new_project) and list the files with (ls). 
 
 
 So that’s it for this video. We hope you find this development environment
