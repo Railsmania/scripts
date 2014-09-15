@@ -1,0 +1,330 @@
+﻿1
+00:00:00,000 --> 00:00:04,000
+Hoy vamos a añadir una herramienta para crear test automáticos
+
+2
+00:00:04,000 --> 00:00:08,000
+que nos permitiran verificar que estamos construyendo funcionalidad que hace exactamente lo que queremos que haga.
+
+3
+00:00:08,000 --> 00:00:12,000
+Si no sabes lo que es el desarrollo guiado por comportamiento
+
+4
+00:00:12,000 --> 00:00:16,000
+o el desarrollo guiado por test, puedes aprender mas en
+
+5
+00:00:16,000 --> 00:00:20,000
+las notas de esta lección. En esta lección vamos a hacer algo muy simple
+
+6
+00:00:20,000 --> 00:00:24,000
+para que puedas comprender lo que esta ocurriendo incluso si
+
+7
+00:00:24,000 --> 00:00:28,000
+no estas familiarizado con estos temas. Asi que empecemos!
+
+8
+00:00:28,000 --> 00:00:32,000
+Primero vamos a abrir el fichero Gemfile de nuestra lección anterior.
+
+9
+00:00:32,000 --> 00:00:36,000
+Este fichero contiene una lista de todo el software que tu proyecto
+
+10
+00:00:36,000 --> 00:00:40,000
+esta utilizando. Como puedes ver, incluso Rails esta en esta
+
+11
+00:00:40,000 --> 00:00:44,000
+en esta lista de dependencias. Al final del fichero vamos a crear
+
+12
+00:00:44,000 --> 00:00:48,000
+un grupo de gemas que solo están disponibles para desarrollo y tests
+
+13
+00:00:48,000 --> 00:00:52,000
+las tres gemas que vamos a incluir son: rspec-rails, cucumer-rails
+
+14
+00:00:52,000 --> 00:00:56,000
+y database_cleaner.
+
+15
+00:00:56,000 --> 00:01:00,000
+El numero que escribimos detrás de cada gema indica la version
+
+16
+00:01:00,000 --> 00:01:04,000
+a usar. Para asegurar que tienes exactamente la misma experiencia que te enseñamos en este video,
+
+17
+00:01:04,000 --> 00:01:08,000
+asegurare de utilizar exactamente las mismas versiones que tenemos aquí.
+
+18
+00:01:08,000 --> 00:01:12,000
+Ahora, guardamos el fichero.
+
+19
+00:01:12,000 --> 00:01:12,966
+
+20
+00:01:12,966 --> 00:01:16,966
+y descargar las nuevas dependencias de nuestro proyecto.
+
+21
+00:01:16,966 --> 00:01:20,966
+and gather any dependencies that we didn't gather previously.
+
+22
+00:01:20,966 --> 00:01:24,966
+Así que abrimos una terminal y ejecutamos: bundle install
+
+23
+00:01:24,966 --> 00:01:28,966
+Bundler descargara las 3 nuevas dependencias que hemos indicado
+
+24
+00:01:28,966 --> 00:01:32,966
+y cualquier otra dependencia que estas necesiten y las instalara
+
+25
+00:01:32,966 --> 00:01:36,966
+para que nuestra aplicación las pueda utilizar. Una vez que Bundler haya terminado
+
+26
+00:01:36,966 --> 00:01:40,966
+de instalar nuestras gemas, tenemos que completar un solo paso especial que Cucumber
+
+27
+00:01:40,966 --> 00:01:44,966
+requiere para su instalación. En la terminal escribe:
+rails generate cucumber:install
+
+
+28
+00:01:44,966 --> 00:01:48,966
+Y pulsa enter.
+Cucumber crea los archivos y carpetas necesarios
+
+29
+00:01:48,966 --> 00:01:52,966
+para nuestro proyecto y ahora es el momento de verificar que todo está instalado correctamente.
+
+30
+00:01:52,966 --> 00:01:56,966
+Para ello, vamos a ejecutar:   bundle exec rake cucumber
+
+31
+00:01:56,966 --> 00:02:00,966
+
+
+32
+00:02:00,966 --> 00:02:04,966
+No vemos ningún error. La salida de la terminal menciona
+
+33
+00:02:04,966 --> 00:02:08,966
+que hay cero escenarios con cero pasos, y eso es completamente cierto porque
+
+34
+00:02:08,966 --> 00:02:12,966
+no hemos creado ninguno todavía. Ahora es el momento de
+
+35
+00:02:12,966 --> 00:02:16,966
+escribir nuestro primer escenario.
+Crea un fichero en el directorio /features
+
+36
+00:02:16,966 --> 00:02:20,966
+llamado dashboards.feature
+En ese fichero, vamos a empezar
+
+37
+00:02:20,966 --> 00:02:24,966
+con la palabra clave Feature. Y escribimos el nombre de esta funcionalidad.
+
+38
+00:02:24,966 --> 00:02:28,966
+En la siguiente linea, identamos el texto y
+
+39
+00:02:28,966 --> 00:02:32,966
+escribimos una pequeña historia explicando lo que queremos hacer.
+
+40
+00:02:32,966 --> 00:02:36,966
+Para ver rápidamente la actividad actual
+
+
+41
+00:02:36,966 --> 00:02:40,966
+como usuario accedo a un panel de control central
+
+42
+00:02:40,966 --> 00:02:44,966
+Esta es la funcionalidad que queremos comprobar en este fichero. Ahora,tenemos que
+
+43
+00:02:44,966 --> 00:02:48,966
+escribir un escenario que pone a prueba esta función.
+Escribimos un escenario simple cubriendo
+
+44
+00:02:48,966 --> 00:02:52,966
+el requisito de que el usuario pude ver el dashboard.
+
+45
+00:02:52,966 --> 00:02:56,966
+Cuando visito la url raíz Entonces la respuesta debe ser el dashboard central.
+
+46
+00:02:56,966 --> 00:03:00,966
+Eso es todo.
+
+47
+00:03:00,966 --> 00:03:04,966
+Nuestro siguiente paso es ejecutar otra vez el comando cucumber. En la terminal, ejecuta:
+
+48
+00:03:04,966 --> 00:03:08,966
+En la terminal, ejecuta:
+bundle exec rake cucumber
+
+49
+00:03:08,966 --> 00:03:12,966
+Esta vez, el resultado es diferente. Cucumber intentó ejecutar el escenario,
+
+50
+00:03:12,966 --> 00:03:16,966
+pero no sabía como ejecutar los pasos que escribimos.
+
+51
+00:03:16,966 --> 00:03:20,966
+Afortunadamente, Cucumber ha sugerido código que podemos utilizar para definir estos pasos.
+
+52
+00:03:20,966 --> 00:03:24,966
+Copia los pasos sugeridos en la terminal,
+
+53
+00:03:24,966 --> 00:03:28,966
+crea un fichero llamado dashboard.rb en nuestro directorio /features/step_definitions,
+
+54
+00:03:28,966 --> 00:03:31,666
+ y pega el contenido sugerido allí.
+
+55
+00:03:31,666 --> 00:03:34,433
+
+
+56
+00:03:34,433 --> 00:03:38,433
+Guarda el fichero, y ejecuta cucumber de nuevo para ver la diferencia:
+
+57
+00:03:38,433 --> 00:03:42,433
+
+
+58
+00:03:42,433 --> 00:03:46,433
+Esta vez, cucumber encuentra las definiciones de los pasos pero estas están vacias
+
+59
+00:03:46,433 --> 00:03:50,433
+porque no las hemos personalidado para comprobar exactamente lo que queremos que hagan.
+
+
+60
+00:03:50,433 --> 00:03:54,433
+Ahora todo lo que tenemos que hacer es escribir un poco de código dentro de las definiciones.
+
+
+61
+00:03:54,433 --> 00:04:01,333
+En nuestro primer paso, queremos visitar la url raíz de nuestra aplicación.
+
+
+62
+00:04:01,333 --> 00:04:05,333
+En el segundo paso, queremos verificar que la respuesta HTML
+
+63
+00:04:05,333 --> 00:04:09,333
+tiene un cierto contenido que podamos identificar como el dashboard.
+
+64
+00:04:09,333 --> 00:04:13,333
+Por ahora vamos a decir que esperamos que
+
+65
+00:04:13,333 --> 00:04:17,333
+la página tenga el contenido 'Dashboard'.
+
+66
+00:04:17,333 --> 00:04:21,333
+Vamos a ejecutar cucumber de nuevo.
+
+67
+00:04:21,333 --> 00:04:25,333
+bien!, pasan. Pero vamos a asegurarnos de que no
+
+68
+00:04:25,333 --> 00:04:26,666
+estamos siendo engañados. Vamos a ver
+
+69
+00:04:26,666 --> 00:04:30,666
+si realmente está poniendo a prueba el contenido de la página Podemos hacer esto cambiando
+
+70
+00:04:30,666 --> 00:04:34,666
+'Dashboard' a algo que sabemos que no está en esa página como 'RailsMania '
+
+71
+00:04:34,666 --> 00:04:41,000
+
+
+72
+00:04:41,000 --> 00:04:45,866
+Ejecutamos cucumber otra vez y vemos que el escenario falla,
+
+73
+00:04:45,866 --> 00:04:49,866
+incluso vemos que se esperaba ‘railsmania’
+
+74
+00:04:49,866 --> 00:04:53,866
+pero que no se ha encontrado en todo el HTML.
+
+75
+00:04:53,866 --> 00:04:57,866
+Perfecto, hemos dejado listo nuestro proyecto para desarrollar
+
+76
+00:04:57,866 --> 00:05:01,866
+guiados por comportamiento. En la próxima lección vamos a
+
+77
+00:05:01,866 --> 00:05:05,866
+mostrar el escenario con la funcionalidad antes de escribir el código que la implementa.
+
+78
+00:05:05,866 --> 00:05:09,866
+Si quieres aprender mas sobre como funciona Cucumber y sus muchas
+
+79
+00:05:09,866 --> 00:05:13,866
+características poco conocidas, echa un vistazo a la lección Cucumber en profundidad
+
+80
+00:05:13,866 --> 00:05:16,566
+en RailsMania.com!
+Gracias por tu atención y hasta la próxima
