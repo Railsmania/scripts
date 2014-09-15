@@ -1,0 +1,127 @@
+1
+00:00:00,000 --> 00:00:04,000
+Hola! En este video voy a explicar rápidamente cómo trabajar
+
+2
+00:00:04,000 --> 00:00:08,000
+con nuestro entorno de desarrollo online. El entorno de desarrollo
+
+3
+00:00:08,000 --> 00:00:12,000
+tiene la funcionalidad justa para ayudarte a desarrollar tus
+
+4
+00:00:12,000 --> 00:00:16,000
+aplicaciones sin ser demasiado complicado.
+
+5
+00:00:16,000 --> 00:00:20,000
+A la izquierda tenemos la vista del sistema de ficheros. Cada cuenta provee un directorio
+
+6
+00:00:20,000 --> 00:00:24,000
+como espacio de trabajo. Podemos hacer click en ese directorio para expandirlo.
+
+7
+00:00:24,000 --> 00:00:28,000
+Para abrir un archivo, simplemente hacemos click en él una vez.
+
+8
+00:00:28,000 --> 00:00:32,000
+Haciendo click con el boton derecho en un directorio tenemos la opción para subir archivos o directorios.
+
+9
+00:00:32,000 --> 00:00:36,000
+Eligiendo cualquiera de estas opciones te permitirá seleccionar archivos en tu ordenador.
+
+10
+00:00:36,000 --> 00:00:40,000
+Puedes seleccionar uno o más archivos y hacer click en Aceptar para subir
+
+11
+00:00:40,000 --> 00:00:44,000
+los ficheros a tu espacio de trabajo.
+
+12
+00:00:44,000 --> 00:00:48,000
+En nuestro entorno de desarrollo, tienes suficiento espacio para albergar todos
+
+13
+00:00:48,000 --> 00:00:52,000
+los archivos necesarios en una típica aplicación Rails.
+
+14
+00:00:52,000 --> 00:00:56,000
+La parte principal de la ventana, en el lado derecho, es la vista del editor
+
+15
+00:00:56,000 --> 00:01:00,000
+Es un editor simple y fácil de usar con resaltado de sintaxis para Ruby.
+
+16
+00:01:00,000 --> 00:01:04,000
+Cuando modificamos cualquier archivo se verá esta marca
+
+17
+00:01:04,000 --> 00:01:08,000
+Indica que el fichero aún no está guardado.
+
+18
+00:01:08,000 --> 00:01:12,000
+Para guardar el archivo, seleccione Edit -> Save en la barra de menú
+
+19
+00:01:12,000 --> 00:01:16,000
+o usa las teclas de acceso rápido control + s en Windows
+
+20
+00:01:16,000 --> 00:01:20,000
+o comando + s en Mac
+
+21
+00:01:20,000 --> 00:01:24,000
+El fichero se guardará en nuestro editor y será accesible desde cualquiera de sus dispositivos.
+
+22
+00:01:24,000 --> 00:01:28,000
+El último componente es la terminal.
+
+23
+00:01:28,000 --> 00:01:32,000
+Nuestro entorno de desarrollo te da acceso a un sistema Linux Debian
+
+24
+00:01:32,000 --> 00:01:36,000
+con todos los privilegios. Tienes acceso a todos los comandos que necesitas.
+
+25
+00:01:36,000 --> 00:01:40,000
+En las lecciones a menudo vamos a utilizar comandos de Rails en la terminal.
+
+26
+00:01:40,000 --> 00:01:44,000
+Por ejemplo podemos ejecutar Rails new como rails new new_project
+
+27
+00:01:44,000 --> 00:01:48,000
+La vista de archivos se actualiza automáticamente c
+
+28
+00:01:48,000 --> 00:01:52,000
+con el nuevo proyecto que creó Rails.
+
+29
+00:01:52,000 --> 00:01:56,000
+Ahora podemos pasar a este nuevo directorio utilizando estándar comandos
+
+30
+00:01:56,000 --> 00:02:00,000
+como  "cd new_project" y listar
+
+31
+00:02:00,000 --> 00:02:04,000
+los ficheros con "ls"
+
+32
+00:02:04,000 --> 00:02:09,333
+Eso es todo en este video. Esperamos que este entorno de desarrollo te resulte simple y útil.
