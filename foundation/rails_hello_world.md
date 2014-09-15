@@ -1,6 +1,6 @@
 # Basic concepts and Hello world in Rails.
 
-In this lesson we will review the basics of working on and in a Ruby on Rails project.
+In this lesson we'll review the basics of working on and in a Ruby on Rails project.
 
 # New project
 Let’s get started by creating a new project. Creating a new project is very easy, just execute the "rails new" command in the terminal:
@@ -44,7 +44,7 @@ Even though we just generated our project, we can already launch a web server wi
 bundle execute rails server
 
 This command starts a web server that will serve the default
-rails page when accesed with a browser. The default landing page is not very interesting but we know our project is working properly.  
+rails page when accesed with a browser. The default landing page is not very interesting but we know our project is working properly when we see it.  
 
 ##### (Close browser)
 
@@ -61,7 +61,7 @@ user types in the browser to the software code in your project's controllers.
 As an example, let’s uncomment this line for the root route.
 
 Root means the url when the user goes to your site without indicating
-any path. The ‘wellcome#index’ format indicates the welcome controller,
+any path. The ‘welcome#index’ format indicates the welcome controller,
 index action. Meaning, when the user comes to the root url of
 your site the index action of the welcome controller will be called.
 
@@ -99,8 +99,7 @@ end
 end
 ```
 
-Now the controller is ready, this method will be called but we don’t
-have anything to give back. We still need to have a view to send to the
+Now the controller is ready, this method will be called but at this point it won't return anything useful. We still need to have a view to send to the
 user’s browser.
 
 # Views

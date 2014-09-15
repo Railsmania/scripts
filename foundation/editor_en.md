@@ -25,7 +25,7 @@ When we modify any file you will see this mark (show the mark)
 
 indicating it is not yet saved. 
 
-To save the file, select File -> Save from the menu bar, or use the standard shortcut keys to save, such as - control+s on windows
+To save the file, select Editor -> Save from the menu bar, or use the standard shortcut keys to save, such as - control+s on windows
 and command+s on mac. The file will be saved in our cloud environment and will be accessible from any of your devices.
 
 The last important component is the terminal view. Our development

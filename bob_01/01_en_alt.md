@@ -7,7 +7,7 @@ First, let's open up a command line window to create our Rails project. We're go
 
 Rails new takes a few moments to generate all the base files for your project. Once it's compelete, let's verify everything is ok by starting a development rails http server on localhost.
 
-From the command line run "rails server". Now open a new browser tab and go to [insert URL and port here].
+From the command line run "bundle exec rails server". Now open a new browser tab and go to [insert URL and port here].
 
 We can see the landing page that Rails generated for us. It displays information about the environment that our application is currently running in. Everything is working fine if we can see this landing page.
 
@@ -15,7 +15,7 @@ Our first question: how do we show anything other than the default landing page 
 
 The answer: by adding a route to our routes file. Every URL that rails will respond to must be added to the routes file. Here's what we'll do:
 
-Open up the routes file. Uncomment the root directive. We know we want a cool admin dashboard, so we'll rename this rout to go to the dashboard's index route and save it.
+Open up the routes file. Uncomment the root directive. We know we want a cool admin dashboard, so we'll rename this route to go to the dashboard's index route and save it.
 
 Let's refresh our app's browser tab. Notice the landing page is gone. It's been replaced by this lovely error message page. It points out that we have a routing error. The specific issue is that the DashboardsController is missing.
 
@@ -38,7 +38,7 @@ Now we need to create a view for this action. In the app/views/ directory create
 <h1>In Dashboards Index</h1>
 ```
 
-If we save now, restart our rails server, and view the project in our browser -- we'll see that dashboard's index view and our message.
+If we save now, restart our rails server, and view the project in our browser -- we'll see the dashboard's index view and our message.
 
 Great, now it's time to add our bootstrap theme. Most bootstrap themes come with example HTML and all the CSS and Javascript nestled away in subfolders following different naming conventions. That's not a problem for us.
 
