@@ -1,0 +1,656 @@
+﻿1
+00:00:00,000 --> 00:00:04,000
+In this lesson we're going to require users to authenticate before they can see the
+
+2
+00:00:04,000 --> 00:00:08,000
+dashboard that we're working on. To do that, we're going to use an
+
+3
+00:00:08,000 --> 00:00:12,000
+Open Authentication strategy, or "Oauth", to log users into our
+
+4
+00:00:12,000 --> 00:00:16,000
+application. If you're not familiar with Oauth
+
+5
+00:00:16,000 --> 00:00:20,000
+please check the lesson notes for a thorough explanation.
+
+6
+00:00:20,000 --> 00:00:24,000
+Today, we're going to use the Omniauth gem and an Oauth strategy gem to allow users
+
+7
+00:00:24,000 --> 00:00:28,000
+to authenticate via DigitalOcean's Oauth service.
+
+8
+00:00:28,000 --> 00:00:32,000
+At the bottom of our gemfile we'll add Omniauth and Omniauth-digitalocean
+
+9
+00:00:32,000 --> 00:00:36,000
+gems, each fixed to a specific version.
+
+10
+00:00:36,000 --> 00:00:40,000
+Then, we'll bundle install.
+
+11
+00:00:40,000 --> 00:00:44,000
+Before we start writing any code, you may remember that
+
+12
+00:00:44,000 --> 00:00:48,000
+in our last lesson we added Cucumber to our project so we could follow a test-first
+
+13
+00:00:48,000 --> 00:00:52,000
+method, also known as Behavior-Driven-Development or BDD.
+
+14
+00:00:52,000 --> 00:00:56,000
+So, let's write the feature scenario that we need to cover for the
+
+15
+00:00:56,000 --> 00:01:00,000
+most basic authentication requirements.
+
+16
+00:01:00,000 --> 00:01:04,000
+In the features directory, create a file named authentication.feature
+
+17
+00:01:04,000 --> 00:01:08,000
+In it, write the following: "In order to protect sensitive information
+
+18
+00:01:08,000 --> 00:01:12,000
+as a user, I should log in before accessing my dashboard"
+
+19
+00:01:12,000 --> 00:01:16,000
+Scenario: unauthenticated request to a dashboard
+
+20
+00:01:16,000 --> 00:01:20,000
+"Given I am not logged in. When I visit
+
+21
+00:01:20,000 --> 00:01:24,000
+the root URL then the response should be the login page"
+
+22
+00:01:24,000 --> 00:01:28,000
+Now, run the "bundle exec cucumber" command.
+
+23
+00:01:28,000 --> 00:01:32,000
+Cucumber gives us the recommended step definitions.
+
+24
+00:01:32,000 --> 00:01:36,000
+Copy those and put them into a file named authentication.rb
+
+25
+00:01:36,000 --> 00:01:40,000
+inside the features/step_definitions directory.
+
+26
+00:01:40,000 --> 00:01:44,000
+So, what does it mean for a user
+
+27
+00:01:44,000 --> 00:01:48,000
+to not be logged in? For our application
+
+28
+00:01:48,000 --> 00:01:52,000
+a user is not logged in if they have no active session id.
+
+29
+00:01:52,000 --> 00:01:56,000
+Because by default a user has no active session ID, the first step definition
+
+30
+00:01:56,000 --> 00:02:00,000
+can remain blank. Now the second definition is simple.
+
+31
+00:02:00,000 --> 00:02:04,000
+We just need to have a login page. Our bootstrap theme actually came with a
+
+32
+00:02:04,000 --> 00:02:08,000
+login page. So, let's use it.
+
+33
+00:02:08,000 --> 00:02:12,000
+The sample login page is simple
+
+34
+00:02:12,000 --> 00:02:16,000
+and has very little text. The "Please Sign In" text looks unique
+
+35
+00:02:16,000 --> 00:02:20,000
+enough for us to use for our test's target.
+
+36
+00:02:20,000 --> 00:02:24,000
+That means, in this step we can, expect
+
+37
+00:02:24,000 --> 00:02:28,000
+the page to have content
+
+38
+00:02:28,000 --> 00:02:32,000
+"Please Sign In". Ok, running
+
+39
+00:02:32,000 --> 00:02:36,000
+the scenarios with "bundle exec cucumber" - one fails, as expected
+
+40
+00:02:36,000 --> 00:02:40,000
+because we don't have a login page.
+
+41
+00:02:40,000 --> 00:02:44,000
+Create a sessions_controller.rb in app/controllers
+
+42
+00:02:44,000 --> 00:02:48,000
+it will inherit for ApplicationController and will have a single method
+
+43
+00:02:48,000 --> 00:02:54,066
+"new".
+
+44
+00:02:54,066 --> 00:02:58,066
+Save it. Then create a directory named "sessions" in app/views
+
+45
+00:02:58,066 --> 00:03:02,066
+
+
+46
+00:03:02,066 --> 00:03:06,066
+In there, we'll create a new.html.erb file and copy in all the body
+
+47
+00:03:06,066 --> 00:03:10,066
+content from the bootstrap theme's login.html.
+
+48
+00:03:10,066 --> 00:03:14,066
+Be sure not to copy the javascript references, though.
+
+49
+00:03:14,066 --> 00:03:18,066
+We already included those in a previous lesson.
+
+50
+00:03:18,066 --> 00:03:22,066
+We'll make one edit to this template. Since we'll be doing Oauth
+
+51
+00:03:22,066 --> 00:03:26,066
+via DigitalOcean, we need a nice logo on here that people can click
+
+52
+00:03:26,066 --> 00:03:30,066
+to authenticate. This logo is available in the lesson notes so just
+
+53
+00:03:30,066 --> 00:03:34,066
+add the file to your app/assets/images directory.
+
+54
+00:03:34,066 --> 00:03:38,066
+Then, right above the existing HTML form tag
+
+55
+00:03:38,066 --> 00:03:42,066
+insert a link with this logo.
+
+56
+00:03:42,066 --> 00:03:46,066
+The href for this link is pointing at a route that the omniauth gem provides
+
+57
+00:03:46,066 --> 00:03:50,066
+our rails application. After adding that logo
+
+58
+00:03:50,066 --> 00:03:54,066
+comment out the regular login form, since we don't need it right now,
+
+59
+00:03:54,066 --> 00:03:58,066
+and save that file. After reading
+
+60
+00:03:58,066 --> 00:04:02,066
+the omniauth documentation, I know that we'll need these specific routes.
+
+61
+00:04:02,066 --> 00:04:06,066
+GET auth/new, GET auth/provider/callback
+
+62
+00:04:06,066 --> 00:04:10,066
+GET auth/logout
+
+63
+00:04:10,066 --> 00:04:14,066
+and GET auth/failure. We'll route each them to our SessionsController.
+
+64
+00:04:14,066 --> 00:04:18,066
+Auth/new will go to SessionsController new method.
+
+65
+00:04:18,066 --> 00:04:22,066
+And auth/provider/callback will go to a create method
+
+66
+00:04:22,066 --> 00:04:26,066
+in SessionsController. While the auth/logout route will point
+
+67
+00:04:26,066 --> 00:04:30,066
+to the SessionsController destroy, and auth/failure will point
+
+68
+00:04:30,066 --> 00:04:34,066
+to "sessions#failure". We didn't actually add
+
+69
+00:04:34,066 --> 00:04:38,066
+the "create", "failure", and destroy methods to the controller yet. So let's
+
+70
+00:04:38,066 --> 00:04:42,066
+go back and add those now. In app/controllers/sessions_controller.rb
+
+71
+00:04:42,066 --> 00:04:46,066
+add those 3 blank methods.
+
+72
+00:04:46,066 --> 00:04:50,066
+Make sure you save both the controller and the routes file.
+
+73
+00:04:50,066 --> 00:04:54,066
+Now, let's do the minimum necessary to pass our scenario.
+
+74
+00:04:54,066 --> 00:04:58,066
+All we have to do is redirect to the login page for this to pass.
+
+75
+00:04:58,066 --> 00:05:02,066
+We'll do that using a before_filter in application controller.
+
+76
+00:05:02,066 --> 00:05:06,066
+In app/controllers/application_controller.rb
+
+77
+00:05:06,066 --> 00:05:10,066
+named "verify_session" then add it to the before filters.
+
+78
+00:05:10,066 --> 00:05:14,066
+We want this method to redirect to the login page.
+
+79
+00:05:14,066 --> 00:05:18,066
+We can find the route to the login page by opening a terminal and typing:
+
+80
+00:05:18,066 --> 00:05:22,066
+"bundle exec rake routes"
+
+81
+00:05:22,066 --> 00:05:26,066
+There we see that the path to "sessions#new" is the auth_new path.
+
+82
+00:05:26,066 --> 00:05:30,066
+So this method should just redirect to the "auth_new" path.
+
+83
+00:05:30,066 --> 00:05:34,066
+Save the application_controller.
+
+84
+00:05:34,066 --> 00:05:38,066
+Since we added this before_filter in application_controller
+
+85
+00:05:38,066 --> 00:05:42,066
+it will apply to all controllers that inherit from it.
+
+86
+00:05:42,066 --> 00:05:46,066
+To prevent an infinite redirect loop, we need to add
+
+87
+00:05:46,066 --> 00:05:50,066
+a skip_before_filter to the SessionsController.
+
+88
+00:05:50,066 --> 00:05:54,066
+Now, let's run our scenarios. The output shows us
+
+89
+00:05:54,066 --> 00:05:58,066
+that our new scenario is now passing, but the scenario that we wrote in the previous lesson
+
+90
+00:05:58,066 --> 00:06:02,066
+is now failing. Since we want only authenticated users to access
+
+91
+00:06:02,066 --> 00:06:06,066
+the dashboard, this makes sense. But now we need to write the code
+
+92
+00:06:06,066 --> 00:06:10,066
+so a logged in user can access the dashboard page.
+
+93
+00:06:10,066 --> 00:06:14,066
+First, we'll need an initializer for Omniauth.
+
+94
+00:06:14,066 --> 00:06:18,066
+In config/initializers directory, create a file named
+
+95
+00:06:18,066 --> 00:06:22,066
+"01_omniauth.rb" and add this code.
+
+96
+00:06:22,066 --> 00:06:26,066
+The two placeholder strings are for your client ID and secret
+
+97
+00:06:26,066 --> 00:06:30,066
+token that you got from Digital Ocean. In the lesson notes on RailsMania.com
+
+98
+00:06:30,066 --> 00:06:34,066
+we show what you'll need to do to get those.
+
+99
+00:06:34,066 --> 00:06:38,066
+So be sure to check that out if you haven't gotten them yet.
+
+100
+00:06:38,066 --> 00:06:42,066
+I'll add my client ID and secret token then save this file.
+
+101
+00:06:42,066 --> 00:06:46,066
+Ok, now it's time to hook everything up. Basically, we want a user to click
+
+102
+00:06:46,066 --> 00:06:50,066
+the login logo, authenticate with Digital Ocean, then redirect to our application.
+
+103
+00:06:50,066 --> 00:06:54,066
+When they redirect, they'll land on
+
+104
+00:06:54,066 --> 00:06:58,066
+the SessionsController create method. Here we want to find an existing
+
+105
+00:06:58,066 --> 00:07:02,066
+session that matches, or create a new one based on the authentication hash
+
+106
+00:07:02,066 --> 00:07:06,066
+as long as it has a truthy value.
+
+107
+00:07:06,066 --> 00:07:10,066
+And, we'll add this protected helper method.
+
+108
+00:07:10,066 --> 00:07:14,066
+There are 3 things that we need to cover about this code.
+
+109
+00:07:14,066 --> 00:07:18,066
+First, the special session hash is provided to us by Rails.
+
+110
+00:07:18,066 --> 00:07:22,066
+This special hash persists information between
+
+111
+00:07:22,066 --> 00:07:26,066
+requests. Anything that we put into it in this request will be around in
+
+112
+00:07:26,066 --> 00:07:30,066
+the next request assuming we don't intentionally delete it and assuming
+
+113
+00:07:30,066 --> 00:07:34,066
+the user doesn't delete their cookies. Second,
+
+114
+00:07:34,066 --> 00:07:38,066
+the request.env is another special hash provided to us by Rails.
+
+115
+00:07:38,066 --> 00:07:42,066
+It contains a lot of information about the current request environment.
+
+116
+00:07:42,066 --> 00:07:46,066
+Omniauth has placed a special payload of information there about the user
+
+117
+00:07:46,066 --> 00:07:50,066
+that just authenticated via our open authentication provider,
+
+118
+00:07:50,066 --> 00:07:54,066
+Digital Ocean. And third, we haven't yet talked about a
+
+119
+00:07:54,066 --> 00:07:58,066
+Session object, but in this method we're finding or creating an instance of
+
+120
+00:07:58,066 --> 00:08:02,066
+Session. The Session object is a model that we need to create.
+
+121
+00:08:02,066 --> 00:08:06,066
+We'll use it to save session information to the database for easy lookup.
+
+122
+00:08:06,066 --> 00:08:10,066
+So, let's create that model by opening a terminal and typing
+
+123
+00:08:10,066 --> 00:08:14,066
+"bundle exec rails generate model
+
+124
+00:08:14,066 --> 00:08:18,066
+Session content:text" followed by
+
+125
+00:08:18,066 --> 00:08:22,066
+"bundle exec rake db:migrate"
+
+126
+00:08:22,066 --> 00:08:26,066
+That created our Session model,
+
+127
+00:08:26,066 --> 00:08:30,066
+database migration, and then we created the table by running the migration.
+
+128
+00:08:30,066 --> 00:08:34,066
+Next, let's go back to our application_controller
+
+129
+00:08:34,066 --> 00:08:34,733
+
+
+130
+00:08:34,733 --> 00:08:38,733
+That quick code that we wrote earlier to pass our scenario needs to be updated.
+
+131
+00:08:38,733 --> 00:08:42,733
+Change it to match the following.
+
+132
+00:08:42,733 --> 00:08:46,733
+Now we're only going to redirect to the login page if there isn't a session instance
+
+133
+00:08:46,733 --> 00:08:50,733
+with ID equal to the value in session[:active]
+
+134
+00:08:50,733 --> 00:08:54,733
+Ok, time to try it all out. Open up a terminal.
+
+135
+00:08:54,733 --> 00:08:58,733
+Make sure you are in your project's directory. Then start your server.
+
+136
+00:08:58,733 --> 00:09:02,733
+"bundle exec rails server"
+
+137
+00:09:02,733 --> 00:09:06,733
+Open your server's URL in your browser and
+
+138
+00:09:06,733 --> 00:09:10,733
+"great!" it redirected us to the login page.
+
+139
+00:09:10,733 --> 00:09:14,733
+Clicking the link takes us to Digital Ocean where we authenticate.
+
+140
+00:09:14,733 --> 00:09:18,733
+Digitial Ocean then sends us back to our application and we're logged in. Success!
+
+141
+00:09:18,733 --> 00:09:22,733
+
+
+142
+00:09:22,733 --> 00:09:26,733
+This is great. Now, let's do two last things.
+
+143
+00:09:26,733 --> 00:09:30,733
+First, let's make this logout link work. We'll edit apps/views/dashboards/index.html.erb
+
+144
+00:09:30,733 --> 00:09:34,733
+to add the auth_logout_path
+
+145
+00:09:34,733 --> 00:09:35,933
+to that link.
+
+146
+00:09:35,933 --> 00:09:38,733
+
+
+147
+00:09:38,733 --> 00:09:42,733
+We'll also update SessionsController's destroy method to properly destroy
+
+148
+00:09:42,733 --> 00:09:46,733
+our session when we click "logout."
+
+149
+00:09:46,733 --> 00:09:50,733
+"reset_session" is another thing Rails provides us. It effectively destroys
+
+150
+00:09:50,733 --> 00:09:54,733
+a session as far as Rails is concerned. We destroy our own session record
+
+151
+00:09:54,733 --> 00:09:58,733
+in the database and then redirect to the login page.
+
+152
+00:09:58,733 --> 00:10:02,733
+We can test this quite simply by clicking logout then trying to access the dashboard.
+
+153
+00:10:02,733 --> 00:10:07,733
+And, finally, when we check our scenarios
+
+154
+00:10:07,733 --> 00:10:09,766
+we see that one thing is still failing.
+
+155
+00:10:09,766 --> 00:10:10,466
+
+
+156
+00:10:10,466 --> 00:10:14,466
+We need to get that one failing scenario to pass. Here's how.
+
+157
+00:10:14,466 --> 00:10:18,466
+Add a new step to the dashboard feature.
+
+158
+00:10:18,466 --> 00:10:22,466
+"Given I am logged in" and add this definition to our
+
+159
+00:10:22,466 --> 00:10:26,466
+authentication.rb file in features/step_definitions.
+
+160
+00:10:26,466 --> 00:10:31,466
+Then, run the scenarios.
+
+161
+00:10:31,466 --> 00:10:35,466
+And, now the pass as expected.
+
+162
+00:10:35,466 --> 00:10:39,466
+Alright, that's all we can pack into one lesson.
+
+163
+00:10:39,466 --> 00:10:44,066
+If you have any questions or comments, please contact us on RailsMania.com. Thanks for watching.
+
+164
+00:10:44,066 --> 00:10:44,099
+
+
