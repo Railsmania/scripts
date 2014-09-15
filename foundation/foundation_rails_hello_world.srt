@@ -1,0 +1,336 @@
+﻿1
+00:00:00,000 --> 00:00:04,000
+In this lesson, we will review the basics of working on
+
+2
+00:00:04,000 --> 00:00:08,000
+and in a Ruby on Rails project. Let's get started by creating a new project.
+
+3
+00:00:08,000 --> 00:00:12,000
+Creating a new project is very easy. Just execute
+
+4
+00:00:12,000 --> 00:00:16,000
+the 'rails new' command in the terminal.
+
+5
+00:00:16,000 --> 00:00:20,000
+Rails (space) new (space) myproject
+
+6
+00:00:20,000 --> 00:00:24,000
+This will create a directory with a working project called "myproject."
+
+7
+00:00:24,000 --> 00:00:28,000
+This project already contains everything you need to run your web application.
+
+8
+00:00:28,000 --> 00:00:32,000
+Let's take a look at its contents.
+
+9
+00:00:32,000 --> 00:00:36,000
+At the highest level, we can see several files and directories.
+
+10
+00:00:36,000 --> 00:00:40,000
+In this video we will only explain the most important files.
+
+11
+00:00:40,000 --> 00:00:44,000
+The first file we want to focus on is the Gemfile.
+
+12
+00:00:44,000 --> 00:00:48,000
+In the Gemfile we define all the software our application
+
+13
+00:00:48,000 --> 00:00:52,000
+depends upon. Ruby software is usually packed
+
+14
+00:00:52,000 --> 00:00:56,000
+in gems. The Gemfile is a list of all the gems that our Rails project uses.
+
+15
+00:00:56,000 --> 00:01:00,000
+We can see, for instance, that we even define the rails version our project depends upon.
+
+16
+00:01:00,000 --> 00:01:04,000
+
+
+17
+00:01:04,000 --> 00:01:08,000
+We can see there are many other gems in this file. Most of the power of Rails comes from
+
+18
+00:01:08,000 --> 00:01:12,000
+installing useful gems that provide functionality to your application.
+
+19
+00:01:12,000 --> 00:01:16,000
+We will teach you how to find, install, and use gems in your projects.
+
+20
+00:01:16,000 --> 00:01:20,000
+When we modify the Gemfile
+
+21
+00:01:20,000 --> 00:01:24,000
+we must execute the command "bundle install"
+
+22
+00:01:24,000 --> 00:01:28,000
+This will download and install all the software defined in the Gemfile
+
+23
+00:01:28,000 --> 00:01:32,000
+and will be available in our project.
+
+24
+00:01:32,000 --> 00:01:36,000
+Even though we just generated our project, we can already
+
+25
+00:01:36,000 --> 00:01:40,000
+launch a web server with our application. Make sure you are in
+
+26
+00:01:40,000 --> 00:01:44,000
+your project's directory, then, in the terminal, run
+
+27
+00:01:44,000 --> 00:01:48,000
+"bundle exec rails server"
+
+28
+00:01:48,000 --> 00:01:52,000
+This command starts a web server that will serve the default
+
+29
+00:01:52,000 --> 00:01:56,000
+Rails page when accessed with a web browser. The default
+
+30
+00:01:56,000 --> 00:02:00,000
+landing page is not very interesting, but at least we know our application is working properly.
+
+31
+00:02:00,000 --> 00:02:04,000
+
+
+32
+00:02:04,000 --> 00:02:08,000
+The next important directory is config/
+
+33
+00:02:08,000 --> 00:02:12,000
+All the configuration files for your project are contained here.
+
+34
+00:02:12,000 --> 00:02:16,000
+For now we can safely use the defaults. We'll explain each file
+
+35
+00:02:16,000 --> 00:02:20,000
+in future lessons as we need to modify them.
+
+36
+00:02:20,000 --> 00:02:24,000
+But, one file that you will most certainly modify in all your projects is the
+
+37
+00:02:24,000 --> 00:02:28,000
+config/routes.rb. This file by default is full of
+
+38
+00:02:28,000 --> 00:02:32,000
+examples of its usage and defines the routes for your project.
+
+39
+00:02:32,000 --> 00:02:36,000
+Routes are used to map the URL that a user types
+
+40
+00:02:36,000 --> 00:02:40,000
+in the browser to the software code in your project's controllers.
+
+41
+00:02:40,000 --> 00:02:44,000
+As an example, let's uncomment this line for the root route.
+
+42
+00:02:44,000 --> 00:02:48,000
+"Root" means the URL when a user goes to your site
+
+43
+00:02:48,000 --> 00:02:52,000
+without indicating any path.
+
+44
+00:02:52,000 --> 00:02:56,000
+The "welcome#index" format indicates the Welcome Controller - Index Action.
+
+45
+00:02:56,000 --> 00:03:00,000
+Meaning, when the user comes to the root URL of your site
+
+46
+00:03:00,000 --> 00:03:04,000
+the index action of the Welcome Controller will be called.
+
+47
+00:03:04,000 --> 00:03:08,000
+So, what is an action, and what is a controller?
+
+48
+00:03:08,000 --> 00:03:12,000
+Well, back to the file system, we can see an "app" directory.
+
+49
+00:03:12,000 --> 00:03:16,000
+Most of what is identified with a Rails application is inside
+
+50
+00:03:16,000 --> 00:03:20,000
+this directory. Rails follows an architecture called "MVC"
+
+51
+00:03:20,000 --> 00:03:24,000
+for Model-View-Controller. We can see that we have sub-directories
+
+52
+00:03:24,000 --> 00:03:28,000
+for models, views, and controllers under app.
+
+53
+00:03:28,000 --> 00:03:32,000
+So when a user visits an application on any given URL
+
+54
+00:03:32,000 --> 00:03:36,000
+Rails will first look at the config/routes.rb file to determine
+
+55
+00:03:36,000 --> 00:03:40,000
+which controller will handle the request for the user.
+
+56
+00:03:40,000 --> 00:03:44,000
+We configured config/routes.rb to use the
+
+57
+00:03:44,000 --> 00:03:48,000
+Welcome Controller. Let's create that file.
+
+58
+00:03:48,000 --> 00:03:52,000
+All the controllers inherit from the Application Controller.
+
+59
+00:03:52,000 --> 00:03:56,000
+This is the code to create a new controller named "Welcome".
+
+60
+00:03:56,000 --> 00:04:00,000
+class WelcomeController inherits from
+
+61
+00:04:00,000 --> 00:04:04,000
+ApplicationController. End.
+
+62
+00:04:04,000 --> 00:04:08,000
+In the config/routes.rb we wrote
+
+63
+00:04:08,000 --> 00:04:12,000
+"welcome#index" meaning
+
+64
+00:04:12,000 --> 00:04:16,000
+the "index" action inside the WelcomeController.
+
+65
+00:04:16,000 --> 00:04:20,000
+To create a new action, we just create a new ruby method.
+
+66
+00:04:20,000 --> 00:04:24,000
+Now the controller is ready, this method will be called, but we don't have
+
+67
+00:04:24,000 --> 00:04:28,000
+anything to give back - we still need to have a view to send to the user's browser.
+
+68
+00:04:28,000 --> 00:04:32,000
+We have
+
+69
+00:04:32,000 --> 00:04:36,000
+an app/views directory where all the views live. By convention,
+
+70
+00:04:36,000 --> 00:04:40,000
+a controller renders views from a directory with the same name as the controller.
+
+71
+00:04:40,000 --> 00:04:44,000
+So let's create a welcome directory.
+
+72
+00:04:44,000 --> 00:04:48,000
+Now, we need to create an index view.
+
+73
+00:04:48,000 --> 00:04:52,000
+Just create an index.html.erb file.
+
+74
+00:04:52,000 --> 00:04:56,000
+The ".erb" extension indicates this file will be executed
+
+75
+00:04:56,000 --> 00:05:00,000
+by Rails before becoming HTML.
+
+76
+00:05:00,000 --> 00:05:04,000
+This allows us to create dynamic content. For instance we can do this mix of
+
+77
+00:05:04,000 --> 00:05:08,000
+Ruby and HTML. Let's restart our
+
+78
+00:05:08,000 --> 00:05:12,000
+Rails server by going to the terminal and executing the
+
+79
+00:05:12,000 --> 00:05:16,000
+"bundle exec rails server" command. Now we can reopen our browser tab
+
+80
+00:05:16,000 --> 00:05:20,000
+to our project and there we can see our first Hello World webpage through Ruby on Rails.
+
+81
+00:05:20,000 --> 00:05:24,000
+That's all for this lesson. We encourage you to explore the other files
+
+82
+00:05:24,000 --> 00:05:28,000
+in this new project. Since generating a new project is very easy
+
+83
+00:05:28,000 --> 00:05:32,000
+if you break anything, just delete the project and create a new one!
+
+84
+00:05:32,000 --> 00:05:32,933
+
+
