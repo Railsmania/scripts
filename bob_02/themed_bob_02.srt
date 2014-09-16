@@ -4,332 +4,313 @@ Today, we'll add some fundamental automated testing tools
 
 2
 00:00:04,000 --> 00:00:08,000
-so we can ensure we delivering working features that do exactly what we wanted them to do.
+so we can ensure we're delivering working features that do exactly what we wanted them to do.
 
 3
 00:00:08,000 --> 00:00:12,000
-If you're not familiar with Behavior Driven Development, often called BDD
+If you're not familiar with Behavior Driven Development, often called
 
 4
 00:00:12,000 --> 00:00:16,000
-or Test Driven Development, I encourage you to learn more about it by
+BDD, or Test Driven Development - I encourage you to learn more about it by
 
 5
 00:00:16,000 --> 00:00:20,000
-looking at this lesson's notes. In this lesson, we're going to keep it
+looking at this lesson's notes. In this lesson, we're going to
 
 6
 00:00:20,000 --> 00:00:24,000
-simple so you can follow along even if you're not familiar with BDD.
+keep it simple so you can follow along, even if you're not familiar with BDD.
 
 7
 00:00:24,000 --> 00:00:28,000
-So, let's get started.
+So, let's get started. First, let's open
 
 8
 00:00:28,000 --> 00:00:32,000
-First, let's open up the Gemfile for the project we made in the previous lesson.
+the gemfile for the project we made in the previous lesson.
 
 9
 00:00:32,000 --> 00:00:36,000
-The gemfile is a list of all nonstandard ruby libraries your application
+The gemfile is a list of all the non-standard Ruby libraries that your application
 
 10
 00:00:36,000 --> 00:00:40,000
-depends upon. As you can see, even Rails is listed
+depends upon. As you can see, even Rails is listed in the gemfile.
 
 11
 00:00:40,000 --> 00:00:44,000
-in the Gemfile. At the bottom we want to create a group of
+At the bottom, we want to create a group
 
 12
 00:00:44,000 --> 00:00:48,000
-gems that are only available in our test environments.
+of gems that are only available to our development and test environments.
 
 13
 00:00:48,000 --> 00:00:52,000
-Three gems that we want to include are, Rspec-rails, cucumber-rails
+The three gems that we want to include are: 
 
 14
 00:00:52,000 --> 00:00:56,000
-and database_cleaner.
+rspec-rails, cucumber-rails, and database_cleaner.
 
 15
 00:00:56,000 --> 00:01:00,000
-The number after each of these gems defines the precise version
+The number after each of these gems defines the precise
 
 16
 00:01:00,000 --> 00:01:04,000
-to use. To ensure you have the exact same experience as captured in this video lesson
+version we'd like to use. To ensure you have the same experience as captured
 
 17
 00:01:04,000 --> 00:01:08,000
-be sure you lock each gem to the same version as we have here.
+in this video lesson, be sure to lock each gem to the exact
 
 18
 00:01:08,000 --> 00:01:12,000
-Now, let's save this file.
+same version as we have here. Now, let's save this file.
 
 19
-00:01:12,000 --> 00:01:12,966
-
+00:01:12,000 --> 00:01:16,000
+After modifying the gemfile, we have to tell our project to
 
 20
-00:01:12,966 --> 00:01:16,966
-After modifying the Gemfile we have to tell our project to recheck 
+00:01:16,000 --> 00:01:20,000
+recheck and gather any dependencies that we didn't gather previously.
 
 21
-00:01:16,966 --> 00:01:20,966
-and gather any dependencies that we didn't gather previously.
+00:01:20,000 --> 00:01:24,000
+So now we need to open up a console and run: bundle install.
 
 22
-00:01:20,966 --> 00:01:24,966
-So now we need to open up a console and run:  bundle install
+00:01:24,000 --> 00:01:28,000
+Bundler will fetch our three new dependencies
 
 23
-00:01:24,966 --> 00:01:28,966
-Bundler will fetch our 3 new dependencies
+00:01:28,000 --> 00:01:32,000
+and any dependencies that they might have and install them
 
 24
-00:01:28,966 --> 00:01:32,966
-and any dependencies that they might have, and install them for our
+00:01:32,000 --> 00:01:36,000
+for our application to use.
 
 25
-00:01:32,966 --> 00:01:36,966
- application to use.       Once bundler has finished 
+00:01:36,000 --> 00:01:40,000
+Once bundler has finished installing our gems, we need to complete a single installation step
 
 26
-00:01:36,966 --> 00:01:40,966
-installing our gems, we need to complete a single installation step that cucumber
+00:01:40,000 --> 00:01:44,000
+that cucumber requires. Simply type:
 
 27
-00:01:40,966 --> 00:01:44,966
-requires. Simply type
-rails generate cucumber:install
-
+00:01:44,000 --> 00:01:48,000
+rails generate cucumber:install. Cucumber creates the necessary files and folders
 
 28
-00:01:44,966 --> 00:01:48,966
-And hit enter.
-Cucumber creates the necessary files 
+00:01:48,000 --> 00:01:52,000
+for our project and now it's time for us to verify everything is installed correctly.
 
 29
-00:01:48,966 --> 00:01:52,966
-and folders for our project and now it's time to verify everything is installed correctly.
+00:01:52,000 --> 00:01:56,000
+To do that, let's run bundle exec rake cucumber
 
 30
-00:01:52,966 --> 00:01:56,966
-To do that, let's run:   bundle exec rake cucumber
+00:01:56,000 --> 00:02:00,000
+We don't see much at all, but at least
 
 31
-00:01:56,966 --> 00:02:00,966
-
+00:02:00,000 --> 00:02:04,000
+there are no errors. The console output does mention that there are zero
 
 32
-00:02:00,966 --> 00:02:04,966
-We don't see much at all, but at least there are no errors. The console output 
+00:02:04,000 --> 00:02:08,000
+scenarios with zero steps, and that's exactly right because we haven't written any yet.
 
 33
-00:02:04,966 --> 00:02:08,966
-does mention that there are zero scenarios with zero steps, and that's exactly right because we
+00:02:08,000 --> 00:02:11,633
+
 
 34
-00:02:08,966 --> 00:02:12,966
- have not written any yet.    So that is time to actually
+00:02:11,633 --> 00:02:15,633
+So now it's time to actually write our first scenario.
 
 35
-00:02:12,966 --> 00:02:16,966
-write our first scenario.
-Create a file in /features/ 
+00:02:15,633 --> 00:02:19,633
+Create a file in features named dashboards.feature
 
 36
-00:02:16,966 --> 00:02:20,966
-named dashboards.feature
-In that file, we'll start
+00:02:19,633 --> 00:02:23,633
+
 
 37
-00:02:20,966 --> 00:02:24,966
-with the keyword Feature: then follow that with a single word description.
-
+00:02:23,633 --> 00:02:27,633
+In that file, we'll start with the keyword "Feature" then follow that with a single
 
 38
-00:02:24,966 --> 00:02:28,966
-Starting with an indent on the second line
+00:02:27,633 --> 00:02:31,633
+word description. Starting with an indent on the second line
 
 39
-00:02:28,966 --> 00:02:32,966
+00:02:31,633 --> 00:02:35,633
 we'll type a short user story explaining what we're trying to do.
 
 40
-00:02:32,966 --> 00:02:36,966
-In order to quickly see current activity
-
+00:02:35,633 --> 00:02:39,633
+In order to see current activity, a user
 
 41
-00:02:36,966 --> 00:02:40,966
-A user
-Should access a central dashboard
+00:02:39,633 --> 00:02:43,633
+should access a central dashboard.
 
 42
-00:02:40,966 --> 00:02:44,966
-That's what we want this feature file to test for. Now, we need
+00:02:43,633 --> 00:02:47,633
+That's what we want this feature file to test for. Now we need to write a scenario
 
 43
-00:02:44,966 --> 00:02:48,966
-to write a scenario that tests this feature. 
-So we'll add a simple scenario that covers
+00:02:47,633 --> 00:02:51,633
+that tests this feature. So we'll add a simple scenario
 
 44
-00:02:48,966 --> 00:02:52,966
- the basic requirement that a user can access a central dashboard.
+00:02:51,633 --> 00:02:55,633
+that covers the basic requirement that a user can access a central dashboard.
 
 45
-00:02:52,966 --> 00:02:56,966
-When I visit the root url
-Then the response should be the central dashboard
+00:02:55,633 --> 00:02:59,633
+When I visit the root URL then the response should be
 
 46
-00:02:56,966 --> 00:03:00,966
-That's it.
+00:02:59,633 --> 00:03:03,633
+the central dashboard. That's it!
 
 47
-00:03:00,966 --> 00:03:04,966
-Our next step is to try rerunning the cucumber command. 
+00:03:03,633 --> 00:03:07,633
+Our next step is to try rerunning the cucumber command.
 
 48
-00:03:04,966 --> 00:03:08,966
-So, in the terminal, run 
-bundle exec rake cucumber
+00:03:07,633 --> 00:03:11,633
+In the terminal run "bundle exec rake cucumber"
 
 49
-00:03:08,966 --> 00:03:12,966
+00:03:11,633 --> 00:03:15,633
 This time the output is different. Cucumber attempted to run the scenario
 
 50
-00:03:12,966 --> 00:03:16,966
-we wrote, but didn't know what commands to execute to actually complete each step.
+00:03:15,633 --> 00:03:19,633
+we wrote but didn't know what commands to execute to actually complete
 
 51
-00:03:16,966 --> 00:03:20,966
-Thankfully, cucumber has suggested to us what we can use for step definitions.
+00:03:19,633 --> 00:03:23,633
+each step. Thankfully, cucumber suggested to us what we can use
 
 52
-00:03:20,966 --> 00:03:24,966
-So, copy the suggested steps, 
+00:03:23,633 --> 00:03:27,633
+for step definitions. So copy the suggested steps.
 
 53
-00:03:24,966 --> 00:03:28,966
-create a file called dashboard.rb in our /features/step_definitions directory,
+00:03:27,633 --> 00:03:31,633
+Create a file called dashboards.rb in features/step_definitions directory
 
 54
-00:03:28,966 --> 00:03:31,666
- and paste the suggested content there. 
+00:03:31,633 --> 00:03:35,633
+and paste the suggested content in there.
 
 55
-00:03:31,666 --> 00:03:34,433
-
+00:03:35,633 --> 00:03:39,633
+Save that file, then run the scenarios again to see the difference.
 
 56
-00:03:34,433 --> 00:03:38,433
-Save that file, then run the scenarios again to see the difference:
+00:03:39,633 --> 00:03:43,633
+"bundle exec rake cucumber"
 
 57
-00:03:38,433 --> 00:03:42,433
-
+00:03:43,633 --> 00:03:47,633
+This time cucumber realizes that we have step definitions but that we haven't
 
 58
-00:03:42,433 --> 00:03:46,433
-This time cucumber realizes we have step definitions, but that we haven't
+00:03:47,633 --> 00:03:51,633
+customized them to test exactly what we want them to test.
 
 59
-00:03:46,433 --> 00:03:50,433
-customized to test exactly what we want them to.
+00:03:51,633 --> 00:03:55,633
+Now all we have to do is write a little code for testing.
 
 60
-00:03:50,433 --> 00:03:54,433
-Now all we have to do is write a little code for testing.
-In our first step,
+00:03:55,633 --> 00:03:59,633
+In our first step we just want to visit our root path of our application.
 
 61
-00:03:54,433 --> 00:04:01,333
-we just want Cucumber to visit the root path of our application.
+00:03:59,633 --> 00:04:03,633
+And in the second step we want cucumber to verify
 
 62
-00:04:01,333 --> 00:04:05,333
-And in the second step, we want Cucumber to verify that the HTML response
+00:04:03,633 --> 00:04:07,633
+that the HTML response has some visible HTML content that
 
 63
-00:04:05,333 --> 00:04:09,333
- has some visible HTML content that we can identify as the central dashboard.
+00:04:07,633 --> 00:04:11,633
+we can identify as the central dashboard.
 
 64
-00:04:09,333 --> 00:04:13,333
-For now we're going to say that the we
-expect
+00:04:11,633 --> 00:04:15,633
+For now we're going to say that we - expect the page to have content
 
 65
-00:04:13,333 --> 00:04:17,333
- the page to have content 'Dashboard'. Let's save that file.
+00:04:15,633 --> 00:04:19,633
+"Dashboard". Let's save that file. Then run our
 
 66
-00:04:17,333 --> 00:04:21,333
-Then run our cucumber scenario again to make sure everything passes.
+00:04:19,633 --> 00:04:24,433
+cucumber scenario again to make sure everything passes.
 
 67
-00:04:21,333 --> 00:04:25,333
-WaaLaa, they pass. But let's make sure that we're not
+00:04:24,433 --> 00:04:28,433
+Voila! They pass. But let's make sure we're not being tricked.
 
 68
-00:04:25,333 --> 00:04:26,666
-being tricked,
+00:04:28,433 --> 00:04:32,433
+Let's see if it really is testing the page's content. We can do that by
 
 69
-00:04:26,666 --> 00:04:30,666
-let's see if it really is testing the page's content. We can do that by changing 
+00:04:32,433 --> 00:04:36,433
+changing "Dashboard" to something we know isn't on that page like "RailsMania"
 
 70
-00:04:30,666 --> 00:04:34,666
-'Dashboard' to something we know isn't on that page like 'RailsMania'
+00:04:36,433 --> 00:04:42,066
+
 
 71
-00:04:34,666 --> 00:04:41,000
-
+00:04:42,066 --> 00:04:47,133
+Running the tests again we see the scenario failed.
 
 72
-00:04:41,000 --> 00:04:45,866
-Running the tests again we see the scenario failed
+00:04:47,133 --> 00:04:51,133
+And it even printed out that it expected to find "RailsMania" but that it wasn't
 
 73
-00:04:45,866 --> 00:04:49,866
-and it even printed out that it expected to find 'railsmania' but 
+00:04:51,133 --> 00:04:55,133
+found in all the visible HTML content. Great! We're all setup
 
 74
-00:04:49,866 --> 00:04:53,866
-it wasn't found in all the visible HTML content.
+00:04:55,133 --> 00:04:59,133
+to start developing this application following a Behavior Driven Development or
 
 75
-00:04:53,866 --> 00:04:57,866
-Great, we're all setup to starting developing this application following
+00:04:59,133 --> 00:05:03,133
+BDD style. In the next lesson we'll show the scenario we wrote for
 
 76
-00:04:57,866 --> 00:05:01,866
- a Behavior Driven Development (or BDD) style. In the next lesson 
+00:05:03,133 --> 00:05:07,133
+our next feature before we get busy writing the code to implement it.
 
 77
-00:05:01,866 --> 00:05:05,866
-we'll show the scenario we wrote for our next feature before we get busy writing the code
+00:05:07,133 --> 00:05:11,133
+If you want to learn more about how Cucumber works and many of its little know features
 
 78
-00:05:05,866 --> 00:05:09,866
- to implement it.     If you want to learn more about how cucumber works
+00:05:11,133 --> 00:05:15,133
+checkout the in-depth lesson on RailsMania.com.
 
 79
-00:05:09,866 --> 00:05:13,866
- and many of its little-known features, check out the in-depth lesson
-
-80
-00:05:13,866 --> 00:05:16,566
- on RailsMania.com!
-Thanks for watching. 
-
+00:05:15,133 --> 00:05:16,799
+Thanks for watching!
 

@@ -1,0 +1,352 @@
+﻿1
+00:00:00,000 --> 00:00:04,000
+Today, we're going to create a new Rails application and add this
+
+2
+00:00:04,000 --> 00:00:08,000
+free HTML dashboard theme we found. Besides the fact it has a lot of cool
+
+3
+00:00:08,000 --> 00:00:12,000
+graphs and dickey-doos, the theme is based on Bootstrap, so it's mobile friendly.
+
+4
+00:00:12,000 --> 00:00:16,000
+
+
+5
+00:00:16,000 --> 00:00:20,000
+Adding a Bootstrap theme to a Rails project is very simple, so let's get started.
+
+6
+00:00:20,000 --> 00:00:24,000
+First, let's open up a command line window to create our Rails
+
+7
+00:00:24,000 --> 00:00:28,000
+project. We're going to name our project "bob".
+
+8
+00:00:28,000 --> 00:00:32,000
+We can create our project by running the "rails new bob" command in the directory
+
+9
+00:00:32,000 --> 00:00:36,000
+where we want our project to be created.
+
+10
+00:00:36,000 --> 00:00:40,000
+Rails takes a few moments to generate all the base files for our project.
+
+11
+00:00:40,000 --> 00:00:44,000
+Once it's complete, let's verify everything is ok by starting a development
+
+12
+00:00:44,000 --> 00:00:48,000
+Rails HTTP server on localhost. From the command line run
+
+13
+00:00:48,000 --> 00:00:52,000
+"bundle exec rails server"
+
+14
+00:00:52,000 --> 00:00:56,000
+Now, open a new browser tab and go to your server's URl.
+
+15
+00:00:56,000 --> 00:01:00,000
+
+
+16
+00:01:00,000 --> 00:01:04,000
+We can see the landing page that Rails generated for us.
+
+17
+00:01:04,000 --> 00:01:08,000
+It displays information about the environment that our application is currently running in.
+
+18
+00:01:08,000 --> 00:01:12,000
+Everything is working fine if we can see this landing page.
+
+19
+00:01:12,000 --> 00:01:16,000
+Our first question: how do we see anything other than the default landing page that Rails provides?
+
+20
+00:01:16,000 --> 00:01:20,000
+The answer: by adding a route to our routes file.
+
+21
+00:01:20,000 --> 00:01:24,000
+Every URL that Rails will respond to must be added to the routes file.
+
+22
+00:01:24,000 --> 00:01:28,000
+Here's what we'll do. Open up the routes file
+
+23
+00:01:28,000 --> 00:01:32,000
+Uncomment the root directive. We know we want
+
+24
+00:01:32,000 --> 00:01:36,000
+a cool admin dashboard, so we'll rename this route to go to the Dashboards'
+
+25
+00:01:36,000 --> 00:01:40,000
+index route. And save it. Let's refresh our app's browser tab.
+
+26
+00:01:40,000 --> 00:01:44,000
+Notice the landing page is gone. It has been replaced by
+
+27
+00:01:44,000 --> 00:01:48,000
+this lovely error message page. It points out that we have a routing error.
+
+28
+00:01:48,000 --> 00:01:52,000
+The specific issue is that the DashboardsController is missing.
+
+29
+00:01:52,000 --> 00:01:56,000
+So, let's create our dashboards_controller
+
+30
+00:01:56,000 --> 00:02:00,000
+and index [method]. In app/controllers directory
+
+31
+00:02:00,000 --> 00:02:06,000
+we want to create a file named dashboards_controller
+
+32
+00:02:06,000 --> 00:02:10,000
+And in that file, we'll put the following code.
+
+33
+00:02:10,000 --> 00:02:14,000
+The DashboardsController inherits from the ApplicationController which Rails
+
+34
+00:02:14,000 --> 00:02:18,000
+has already provided us. And our index action has no special logic
+
+35
+00:02:18,000 --> 00:02:22,000
+so we'll leave it blank.
+
+36
+00:02:22,000 --> 00:02:26,000
+Now we need to create a view for this action. In the app/views directory
+
+37
+00:02:26,000 --> 00:02:30,000
+create a folder named "dashboards" (plural) just like the controller and route.
+
+38
+00:02:30,000 --> 00:02:34,000
+In there, add an index.html.erb
+
+39
+00:02:34,000 --> 00:02:38,000
+file then type in a short message like this.
+
+40
+00:02:38,000 --> 00:02:42,000
+If we save now, restart our rails server, and view the project in our browser
+
+41
+00:02:42,000 --> 00:02:43,066
+
+
+42
+00:02:43,066 --> 00:02:47,066
+We'll see the Dashboard's index view and our message.
+
+43
+00:02:47,066 --> 00:02:51,066
+Great. Now it's time to add our Bootstrap theme.
+
+44
+00:02:51,066 --> 00:02:55,066
+Most Bootstrap themes come with example HTML
+
+45
+00:02:55,066 --> 00:02:59,066
+and all the CSS and Javascript nestled away in subfolders
+
+46
+00:02:59,066 --> 00:03:03,066
+following different naming conventions. That's not a problem for us.
+
+47
+00:03:03,066 --> 00:03:08,600
+All we have to do is move our CSS to assets/stylesheets directory.
+
+48
+00:03:08,600 --> 00:03:12,600
+Any minified CSS we'll discard as long as we have the unminified version.
+
+49
+00:03:12,600 --> 00:03:16,600
+
+
+50
+00:03:16,600 --> 00:03:19,533
+
+
+51
+00:03:19,533 --> 00:03:23,533
+Then, move the javascripts to assets/javascripts.
+
+52
+00:03:23,533 --> 00:03:27,533
+Just like the stylesheets, any minified javascripts we'll discard
+
+53
+00:03:27,533 --> 00:03:33,833
+as long as we have the unminified version.
+
+54
+00:03:33,833 --> 00:03:37,833
+And, move any images to assets/images.
+
+55
+00:03:37,833 --> 00:03:41,833
+Finally, if you have any custom fonts
+
+56
+00:03:41,833 --> 00:03:45,833
+just make a directory inside assets named "fonts" and put them in there.
+
+57
+00:03:45,833 --> 00:04:05,733
+Simple!
+
+58
+00:04:05,733 --> 00:04:09,733
+Ok. Now we need to
+
+59
+00:04:09,733 --> 00:04:13,733
+decide where to put this main theme file. I prefer keeping the
+
+60
+00:04:13,733 --> 00:04:17,733
+original application layout file as simple and clean as possible, just to make it easier to swap
+
+61
+00:04:17,733 --> 00:04:21,733
+out themes in different parts of my application. The only thing I want
+
+62
+00:04:21,733 --> 00:04:25,733
+to do in the apps/views/layouts/application.html.erb
+
+63
+00:04:25,733 --> 00:04:29,733
+is to move the javascript include tag to the bottom
+
+64
+00:04:29,733 --> 00:04:37,466
+of the page, right above the closing body tag.
+
+65
+00:04:37,466 --> 00:04:41,466
+Then, take all the body content from our Bootstrap theme demo file
+
+66
+00:04:41,466 --> 00:04:43,833
+
+
+67
+00:04:43,833 --> 00:04:48,666
+excluding the javascript tags at the bottom
+
+68
+00:04:48,666 --> 00:04:52,666
+copy it, and paste it into the app/views/dashboards/index.html.erb
+
+69
+00:04:52,666 --> 00:04:56,666
+
+
+70
+00:04:56,666 --> 00:05:01,266
+Save it, then refresh our application in the browser.
+
+71
+00:05:01,266 --> 00:05:05,266
+Wow, looks great. But there are a few things missing.
+
+72
+00:05:05,266 --> 00:05:09,266
+Using our browser's developer tools we can see what's broken, but
+
+73
+00:05:09,266 --> 00:05:13,266
+knowing how to fix it is a little more tricky. So here's the quick answer.
+
+74
+00:05:13,266 --> 00:05:17,266
+FontAwesome's CSS file needs to be converted
+
+75
+00:05:17,266 --> 00:05:21,800
+to an .erb file.
+
+76
+00:05:21,800 --> 00:05:25,800
+so we can fix some paths using a Rails path helper.
+
+77
+00:05:25,800 --> 00:05:29,800
+
+
+78
+00:05:29,800 --> 00:05:33,800
+
+
+79
+00:05:33,800 --> 00:05:37,800
+Next we need to fix some of the javascript. We'll stub two of the javascript
+
+80
+00:05:37,800 --> 00:05:41,800
+files that are showing errors in our browser's developer tools console.
+
+81
+00:05:41,800 --> 00:05:45,800
+These two files are demo files for the theme we downloaded.
+
+82
+00:05:45,800 --> 00:05:49,800
+We're going to turn them off by using this stub keyword. That will
+
+83
+00:05:49,800 --> 00:05:53,800
+leave them in the project so we can reuse them later. Stubbing just tells Rails to ignore them.
+
+84
+00:05:53,800 --> 00:05:57,800
+Now, refreshing our project in our browser shows no errors
+
+85
+00:05:57,800 --> 00:06:01,800
+and everything appears to be here.
+
+86
+00:06:01,800 --> 00:06:05,800
+That's it for this lesson. Be sure to watch the additional related
+
+87
+00:06:05,800 --> 00:06:09,800
+content and advanced content we're sharing on RailsMania.com.
+
+88
+00:06:09,800 --> 00:06:10,033
+
+
