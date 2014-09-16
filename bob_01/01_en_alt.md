@@ -7,7 +7,7 @@ First, let's open up a command line window to create our Rails project. We're go
 
 Rails new takes a few moments to generate all the base files for your project. Once it's compelete, let's verify everything is ok by starting a development rails http server on localhost.
 
-From the command line run "bundle exec rails server". Now open a new browser tab and go to [insert URL and port here].
+From the command line run "bundle exec rails server". Now open a new browser tab and go to your server's URL.
 
 We can see the landing page that Rails generated for us. It displays information about the environment that our application is currently running in. Everything is working fine if we can see this landing page.
 
@@ -30,7 +30,7 @@ class DashboardsController < ApplicationController
 end
 ```
 
-The DashboardsController extends the ApplicationController which Rails has already provided us. And our index action has no special logic, so we'll leave it blank.
+The DashboardsController inherits from the ApplicationController which Rails has already provided us. And our index action has no special logic, so we'll leave it blank.
 
 Now we need to create a view for this action. In the app/views/ directory create a folder named dashboards, plural, just like the controller and route. In there, add an index.html.erb file. Then type in a short message like this:
 
