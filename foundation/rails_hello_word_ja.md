@@ -1,5 +1,3 @@
-This file still needs to be reviewed by native
-
 #Railsの基本とHello World
 
 このレッスンでは、Ruby on Railsのプロジェクトの基本を説明します。
