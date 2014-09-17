@@ -1,17 +1,17 @@
 ## Bootstrap!
-Today, we're going to create a new Rails application and add this free HTML dashboard theme we found. Besides the fact it has a lot of cool graphs and dickey doos, the theme is based on bootstrap, so it's mobile friendly. 
+Today, we're going to create a new Rails application and add this free HTML dashboard theme we found. Besides the fact it has a lot of cool graphs and dickey doos, the theme is based on bootstrap, so it's mobile friendly.
 
 Adding a bootstrap theme to a rails project is very simple, so let's get started!
 
 First, let's open up a command line window to create our Rails project. We're going to name our project "bob". We can create our project by running the ```rails new bob``` command in the directory where we want our project to be created.
 
-Rails new takes a few moments to generate all the base files for your project. Once it's compelete, let's verify everything is ok by starting a development rails http server on localhost.
+Rails new takes a few moments to generate all the base files for your project. Once it's complete, let's verify everything is ok by starting a development rails http server on localhost.
 
 From the command line run "bundle exec rails server". Now open a new browser tab and go to your server's URL.
 
 We can see the landing page that Rails generated for us. It displays information about the environment that our application is currently running in. Everything is working fine if we can see this landing page.
 
-Our first question: how do we show anything other than the default landing page that rails provides? 
+Our first question: how do we show anything other than the default landing page that rails provides?
 
 The answer: by adding a route to our routes file. Every URL that rails will respond to must be added to the routes file. Here's what we'll do:
 
@@ -65,6 +65,7 @@ FontAwesome's css file needs to be converted to an erb file, so we can fix some 
 ````
 
 Next, we need to fix some of the javascript. We'll stub 2 javascript files that are showing errors in our browser's developer tools console. These two files are demo files for the theme we downloaded, we're going to turn them off by using this stub keyword.
+We add the following two lines to app/assets/javascripts/application.js:
 
 ```
 //= stub plugins/flot/flot-data
