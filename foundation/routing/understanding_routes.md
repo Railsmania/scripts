@@ -1,5 +1,5 @@
 # Understanding Routes
-In this lesson we're going to review the purpose of routes in Ruby on Rails and the pivotal roles they play in your project's architecture. We'll also look at some useful tools to help you inspect the routes in any project to easily understand its structure. And finally we'll cover some best practices in testing routes.
+In this lesson we're going to review the purpose and basic usage of routes in Ruby on Rails. We'll also look at some useful tools to help you inspect the routes in any project to easily understand its structure. And finally we'll cover some best practices in testing routes.
 
 In the config/routes.rb file you'll find all the routes for your project. The Rails router relies on this configuration file to setup all routes for your application. The main purpose of the Rails router is to recognize incoming requests to specific URLs and to dispatch those requests to an action in a controller. The Rails router also helps to autogenerate paths and URLs within your application so that you can avoid hardcoding URL strings in your views.
 
@@ -15,62 +15,45 @@ the request is dispatched to the patients controller's show action with { id: '1
 
 One thing to note here, routes are specific to the HTTP verb used for the request. In this example with a GET to patients, the route will only connect the request to the patient's controller if the request was a GET request. If you're not familiar with the various HTTP verbs and their different meanings, please check the lesson notes for a reference.
 
-# Generating Paths and URLs from Code
-You can also generate paths and URLs. If this patient route is modified to be:
+# Inspecting Routes
+Rails offers a couple facilities for inspecting your application's routes.
 
-get '/patients/:id', to: 'patients#show', as: 'patient'
-and your application contains this code in the controller:
-
-@patient = Patient.find(17)
-and this in the corresponding view:
-
-<%= link_to 'Patient Record', patient_path(@patient) %>
-then the router will generate the path /patients/17. This reduces the brittleness of your view and makes your code easier to understand. Note that the id does not need to be specified in the route helper.
-
-
-# Inspecting and Testing Routes
-Rails offers a couple facilities for inspecting and testing your routes.
-
-One of the lesser known but easy ways to get a complete list of the available routes in your application, is by starting a rails server in and visiting the "rails/info/routes" route in your browser. This is only available since Rails 4, older versions of Rails did not provide this feature. On this page you can also experiment with the matchers to see what routes will respond to a particular path.
+One of the lesser known but easy ways to get a complete list of the available routes in your application, is by starting a rails server and visiting the "rails/info/routes" route in your browser. This is only available since Rails 4, older versions of Rails did not provide this feature. On this page you can also experiment with the matchers to see what routes will respond to a particular path.
 
 The most common way to inspect routes is in the terminal. There you can execute the rake routes command to produce the same output.
 
 Both methods will list all of your routes, in the same order that they appear in routes.rb. For each route, you'll see:
-
-The route name (if any)
-The HTTP verb used (if the route doesn't respond to all verbs)
-The URL pattern to match
-The routing parameters for the route
-
-For example, here's a small section of the rake routes output for a RESTful route:
 
     users GET    /users(.:format)          users#index
           POST   /users(.:format)          users#create
  new_user GET    /users/new(.:format)      users#new
 edit_user GET    /users/:id/edit(.:format) users#edit
 
-#Testing Routes
-Routes should be included in your testing strategy (just like the rest of your application). Rails offers three built-in assertions designed to make testing routes simpler:
+On the far right you'll see the routing parameters for the route (what it connects to).
 
-assert_generates
-assert_recognizes
-assert_routing
-5.2.1 The assert_generates Assertion
+The URL pattern to match. In the first we see that the route matches to the root of the application, users path. At the end you can see this parenthetical addition "(.:format)". The parenthesis at the end are a conditional match. The dot is there to match a literal dot that you'd usually see in separating a file path to a file type. The colon is used in routes to indicate a variable, so colon-format means that if there is any file extension added to the end of this PATH then the router will store the extension -- excluding the period -- in the params variable named "format". In the last route you can see the "id" variable embedded in the middle of the PATH. So that path expects some special value will be placed there and it will make it available to your application as the param variable "id".
 
-assert_generates asserts that a particular set of options generate a particular path and can be used with default routes or custom routes. For example:
+To the left of the URL pattern is the HTTP verb used such as GET, POST, PUT, or DELETE.
 
-assert_generates '/photos/1', { controller: 'photos', action: 'show', id: '1' }
-assert_generates '/about', controller: 'pages', action: 'about'
-5.2.2 The assert_recognizes Assertion
+And in the first column on the left is the route name if any exists for that route. So the first route to the User's Controller, index action, can be accessed by users_path in your views. The second route to the create method on the User's Controller is the same as the first except it requires the request to be a POST. The third route to User's Controller, new action, can be accessed by "new_user_path" in your views. And similarly, the last can be accessed by the edit_user_path helper method in your view. Using these path helpers are a great way to prevent breaking your view code when you need to refactor application URLs. Let's look at an example of path helpers.
 
-assert_recognizes is the inverse of assert_generates. It asserts that a given path is recognized and routes it to a particular spot in your application. For example:
 
-assert_recognizes({ controller: 'photos', action: 'show', id: '1' }, '/photos/1')
-You can supply a :method argument to specify the HTTP verb:
+# Generating Paths and URLs from Code
+Let's take a another look at how to generate paths and URLs from your routes. Going back to the first route we wrote, let's modify it to be:
 
-assert_recognizes({ controller: 'photos', action: 'create' }, { path: 'photos', method: :post })
-5.2.3 The assert_routing Assertion
+get '/patients/:id', to: 'patients#show', as: 'patient'
 
-The assert_routing assertion checks the route both ways: it tests that the path generates the options, and that the options generate the path. Thus, it combines the functions of assert_generates and assert_recognizes:
+Checking the routes in the application we see the route listed. And we can see it has the route name of "patient" and that it expects a variable value for the id of the patient.
 
-assert_routing({ path: 'photos', method: :post }, { controller: 'photos', action: 'create' })
+And assume our application contains this code in the patient controller:
+
+@patient = Patient.find(17)
+
+which simply is hardcoded to find the seventeenth patient and assign it to the instance variable @patient.
+
+Then in any view we can use the route path helper to generate the link for viewing this patient:
+
+<a href="<%= patient_path(@patient) %>">Patient Record</a>
+When we inspect the output, we can see that the router generated the path /patients/17. And that is the correct path for viewing that object. Generating the URLs like this reduces the brittleness of your view and makes your code easier to maintain and understand.
+
+Well, that's enough for this lesson's dive into routing. In the next lesson on Rails routes we'll uncover more of the details behind resourceful and non-resourceful routing.
