@@ -22,7 +22,7 @@ One of the lesser known but easy ways to get a complete list of the available ro
 
 The most common way to inspect routes is in the terminal. There you can execute the rake routes command to produce the same output.
 
-Both methods will list all of your routes, in the same order that they appear in routes.rb. For each route, you'll see:
+Both methods will list all of your routes, in the same order that they appear in routes.rb. For each route, you'll see something like this:
 
     users GET    /users(.:format)          users#index
           POST   /users(.:format)          users#create
