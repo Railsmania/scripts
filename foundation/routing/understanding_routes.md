@@ -8,7 +8,7 @@ Let's first look at how Rails routes connects an incoming request to code in you
 When your Rails application receives an incoming request for:
 
 GET /patients/17
-it asks the router to match it to a controller action. If the first matching route is:
+Rails asks the router to match this path to a controller action. If the first matching route is:
 
 get '/patients/:id', to: 'patients#show'
 the request is dispatched to the patients controller's show action with { id: '17' } in the special params hash.
@@ -16,11 +16,11 @@ the request is dispatched to the patients controller's show action with { id: '1
 One thing to note here, routes are specific to the HTTP verb used for the request. In this example with a GET to patients, the route will only connect the request to the patient's controller if the request was a GET request. If you're not familiar with the various HTTP verbs and their different meanings, please check the lesson notes for a reference.
 
 # Inspecting Routes
-Rails offers a couple facilities for inspecting your application's routes.
+Rails offers a couple of facilities for inspecting your application's routes.
 
-One of the lesser known but easy ways to get a complete list of the available routes in your application, is by starting a rails server and visiting the "rails/info/routes" route in your browser. This is only available since Rails 4, older versions of Rails did not provide this feature. On this page you can also experiment with the matchers to see what routes will respond to a particular path.
+One of the lesser known but easy ways to get a complete list of the available routes in your application is by starting a rails server and visiting the "rails/info/routes" route in your browser. This is a new feature of Rails 4. On this page you can also experiment with the matchers to see what routes will respond to a particular path.
 
-The most common way to inspect routes is in the terminal. There you can execute the rake routes command to produce the same output.
+The most common way to inspect routes is in the terminal. There you can execute the `rake routes` command to produce the same output.
 
 Both methods will list all of your routes, in the same order that they appear in routes.rb. For each route, you'll see something like this:
 
@@ -31,11 +31,11 @@ edit_user GET    /users/:id/edit(.:format) users#edit
 
 On the far right you'll see the routing parameters for the route (what it connects to).
 
-The URL pattern to match. In the first we see that the route matches to the root of the application, users path. At the end you can see this parenthetical addition "(.:format)". The parenthesis at the end are a conditional match. The dot is there to match a literal dot that you'd usually see in separating a file path to a file type. The colon is used in routes to indicate a variable, so colon-format means that if there is any file extension added to the end of this PATH then the router will store the extension -- excluding the period -- in the params variable named "format". In the last route you can see the "id" variable embedded in the middle of the PATH. So that path expects some special value will be placed there and it will make it available to your application as the param variable "id".
+Next, the URL pattern to match. In the firstline  we see that the route matches to the users path. At the end you can see this parenthetical addition "(.:format)". The parenthesis at the end are a conditional match. The dot is there to match a literal dot that you'd usually see in separating a file path to a file type. The colon is used in routes to indicate a variable, so colon-format means that if there is any file extension added to the end of this PATH then the router will store the extension -- excluding the period -- in the params variable named "format". In the last route you can see the "id" variable embedded in the middle of the PATH. So that path expects some special value will be placed there and it will make it available to your application as the param variable "id".
 
 To the left of the URL pattern is the HTTP verb used such as GET, POST, PUT, or DELETE.
 
-And in the first column on the left is the route name if any exists for that route. So the first route to the User's Controller, index action, can be accessed by users_path in your views. The second route to the create method on the User's Controller is the same as the first except it requires the request to be a POST. The third route to User's Controller, new action, can be accessed by "new_user_path" in your views. And similarly, the last can be accessed by the edit_user_path helper method in your view. Using these path helpers are a great way to prevent breaking your view code when you need to refactor application URLs. Let's look at an example of path helpers.
+And in the first column on the left is the route name if any exists for that route. So the first route to the User's Controller, index action, has the name 'users'. This means that it can be accessed by writing 'users_path' in your views. The second route to the create method on the User's Controller is the same as the first except it requires the request to be a POST. The third route to User's Controller, new action, can be accessed by 'new_user_path' in your views. And similarly, the last can be accessed by the 'edit_user_path' helper method in your view. Using these path helpers are a great way to prevent breaking your view code when you need to refactor application URLs. Let's look at an example of path helpers.
 
 
 # Generating Paths and URLs from Code
