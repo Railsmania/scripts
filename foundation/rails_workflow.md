@@ -18,98 +18,50 @@ For instance if you try to see a profile, the controller will use the User model
 
 This is the MVC pattern used by RubyOnRails and many other web frameworks. This pattern is also common outside web programming so it is very useful to know it well.
 
+Let's look at a real Rails project. In particular it is a book sharing website.
 
-In rails there is one more component worth mentioning here.
-Rails has a routing component, it gets the URL of the user and finds the controller which will serve it.
+Rails autogenerates a project structure. You can know more about this structure in our video about the files on your project.
+Let's open the app folder where much of the code of our project lives. Here we can see directories for controllers, models, views and two extra components, assets and helpers, let's not bother about these two in this lesson.
 
+When we open the app/controllers directory we see three controllers, application_controller, users_controller.rb and books_controller.rb. Every Rails application has an application_controller which serves as a base for all our controllers. We'll talk in deep about this in a lesson about controllers.
+The rest of our controllers are always named with a name in plural + the word 'controller' and as they are ruby files they finish with '.rb'. This is a very important convention in Rails. Let's understand why looking at the views directory.
 
-Let's go through a normal scenario:
+Under views we have a layouts subdirectory which we will ignore for now and a subdirectory named after each of the controllers.
+Inside any of these directories we have several template files, in this case we are using the .erb template language so their extension is .erb. These files names also follow a convention. If we go back to our books controller and we open it, we can see these 'def index, def show' lines which are ruby methods. We see we have one view file named after each of these methods. Using this convention Rails controllers can automatically find and render a view without us writing any code.
 
-User writes a URL in the browser.
-The browser sends the URL and other stuff we'll talk about in future lessons to the server. This is called a request.
-The server checks the routing, decides what controller to use.
-The controller calls the model and retrieve some data.
-The controller pass the data to the view.
-The view renders with its data modifying the html generated.
-The controller sends the rendered beautiful HTML to the user.
-
-All these processes happen on your server and RubyonRails is a framework which makes it very easy to create applications that behave like this which are a majority.
+Finally let's look at the models subdirectory. We have a user.rb and book.rb files. This is again a rails convention. Models names are in singular. When we open the book.rb file we see it is practically empty. we are just defining the Photo class to inherit from activerecord::Base. This is enough for Rails to create many methods for us. In particular, we will have many methods to update and retrieve data from a database table called books, again a Rails naming convention.
 
 
+As an extra component, not part of MVC but very important in Rails, let's look at our config/routes.rb file. We can see this line:
+resources :books.
 
-Finish here and go to hello world
-or
-explain stuff belown just to show all the naming conventions?
+This line will connect specific URLs with our controllers following again Rails conventions. We explain in deep about this important file in the routes course lessons, please take a look if you want to know more details about what is happening here.
 
+With Routing we can expand our diagram, User -> Routing -> MVC
 
+With all these components in place, let's look how they work together to bring an HTML to the browser of the user.
 
+First we write the URL
+localhost:3000/books
 
+The browser will issue a request "GET /books" to our server.
+We hit the routing which was instructed to understand about 'books', on this URL in particular by convention it goes to the books_controller, to the method '#index'.
 
+Let's look at the method. We see this code:
+@books = Book.all
 
-First we are gonna create a new RubyonRails application just to look at how the theory looks with a real application.
-Execute this in the terminal:
-```
-rails new myfirstproject
-```
+We are using our Photo model to retrieve all the books in our database. We call this data @books.  Our method finishes here, by default, Rails will render the view for this controller with the name of the method.
+We navigate to views/books/index.html.erb, open this file and we see:
+<%= @books.each do |book| %>
+  <div> <%= book.title %> </div>
+  <div> <%= book.author %> </div>
+<%= end %>
 
+A bit of code to generate HTML tags to show all our books. This gets rendered and in our browser and we see a collection of books!
 
+These are the major components of Rails and its main conventions. By follow them we can create websites very easily and with very few lines of code which we can even autogenerate!
+From this lesson you can learn more about routing on the routing lessons, about installing extra software in the gemfile lessons or jump straight into the hello world lesson.
 
-Let's say we write this url in our browser:
-http://www.example.com/books
-
-We own www.example.com and has a RubyOnRails server running there.
-So our server would see this request coming:
-
-GET /books
-
-Our goal is to return a list of all the books we have in the server. Let's see how we do that.
-
-
-
-The name of the project does not matter. With this command, Rails will generate a fully functionning application for us to play with.
-
-
-We need a way to find what code is gonna do this when we get this request.
-We will call this the router, the part of Rails which gets an URL and returns where our code taking care of that URL lives.
-We have several lessons where we explain in detail about how to use this part of Rails.
-For now in a configuration file we'll write books is a resource we want to route:
-
-resources :books
-
-
-The code that will handle the request lives in a part of Rails called controller. Controllers take care of browser requests. They gather the response of our server and send it to the browser.
-Each controller is divided in different code pieces which are called actions.
-
-In Rails, we would name the controller with the name of the resource we want to work with. In this case, books, so we create a books controller. Also by convention when we want to get a list of things as in this case, the action name is 'index'.
-
-
-Each action in the controller has a lot of work to do.
-In the simplest case, it only needs to send an HTML page to the user's browser.
-This HTML in Rails is generated by templates. These templates are called 'views'.
-The controller render the views, which means any code inside the templates are executed and HTML is generated. Then the result is returned.
-
-In Rails, controllers automatically render any view inside a directory with the controller name and with the action as its name.
-In this case, we can see the content of the index view and when we visit our URL, yes, we can see the output!
-
-This is how it is working right now:
-The books url gets translated to the controller's index action which by default finds the books/index.html.erb which gets rendered and the html gets back to the user.
-
-We got an URL working with almost no code!
-
-Now, usually we would like to be more intelligent and insert data in our HTML dinamically. For instance, here we would like to show all our books in the html.
-
-To do this, the controller uses a component called the model. Most of the code in a typical Rails application belongs to the models where you would write the logic of your application.
-
-Rails by default already gives you many useful method in these models. Our Book model already have by default a method called .all which returns all books in our database.
-
-The @ mark before the variable name in the controller means this variable will be also be accessible from the view where we can use it to render all the books information to the user.
-
-Models are the last component of what is called the MVC architecture. M: Models, C: Controllers, V: Views.
-
-Controllers gets a request, call a model to get some data, pass the data to a view and renders it to get a dynamic HTML and returns it to the user.
-
-
-I hope you got an idea of how little you need to write to create a Rails application. And you got the idea of the general workflow of a request. In the following lessons we will teach you how to use each of these components to create all kind of applications easily.
 
 
 
