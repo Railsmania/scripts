@@ -1,6 +1,6 @@
 # Rails basic workflow
 
-In this lesson we are gonna explain the basic concepts of RubyonRails. Please watch this lesson before any other lessons if you are absolutely new to RubyonRails.
+In this lesson we are going to explain the basic concepts of RubyonRails. Please watch this lesson before any other lessons if you are absolutely new to RubyonRails.
 
 RubyOnRails is built using the Ruby language. You do not need to learn to program using Ruby in general right now though. Most of the code you will be creating on the first few lessons is limited by Rails conventions, we recommend to watch our videos and understand how to make simple things with Rails before going deeper into the Ruby language.
 
@@ -18,7 +18,14 @@ For instance if you try to see a profile, the controller will use the User model
 
 This is the MVC pattern used by RubyOnRails and many other web frameworks. This pattern is also common outside web programming so it is very useful to know it well.
 
-Let's look at a real Rails project. In particular it is a book sharing website.
+Let's look at how a real request passes through MVC in a Rails project. 
+
+# make a request in Browser to local server
+# have debugger points in important files
+# step through, each step display powerpoint in bottom corner of screen showing which part of MVC we're in
+# at end we can show basic project structure, folders expanded, color coded or whatever labeled as to what part of MVC they are in
+
+#### Can use some of the below script for explaining each step.
 
 Rails autogenerates a project structure. You can know more about this structure in our video about the files on your project.
 Let's open the app folder where much of the code of our project lives. Here we can see directories for controllers, models, views and two extra components, assets and helpers, let's not bother about these two in this lesson.
@@ -61,9 +68,6 @@ A bit of code to generate HTML tags to show all our books. This gets rendered an
 
 These are the major components of Rails and its main conventions. By follow them we can create websites very easily and with very few lines of code which we can even autogenerate!
 From this lesson you can learn more about routing on the routing lessons, about installing extra software in the gemfile lessons or jump straight into the hello world lesson.
-
-
-
 
 
 
