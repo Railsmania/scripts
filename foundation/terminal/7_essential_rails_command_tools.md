@@ -1,5 +1,5 @@
 # Command Line Basics
-There are a few commands that are absolutely critical to your everyday usage of Rails. In this lesson we will review a few basic ones:
+There are a few commands that are absolutely critical to your everyday usage of Rails. In this lesson we will briefly review six of them:
 
 - rails new
 - rails server
@@ -11,18 +11,19 @@ There are a few commands that are absolutely critical to your everyday usage of 
 Let's create a simple Rails application to step through each of these commands in context.
 
 # rails new
-This is achieved with the 'rails new' command. For instance
+Creating a new Rails application is as easy as calling the 'rails new' command. For instance
 ```
 rails new commandsapp
 ```
 
-'rails new' autogenerates a default project. It will set you up with what seems like a huge amount of stuff for such a tiny command! You've got the entire Rails directory structure now with all the code you need to run our simple application right out of the box.
+'rails new' autogenerates a default project with the name you provide in the parameter. You've got the entire Rails directory structure now with all the code you need to run a simple application right out of the box.
+
 This command also has several options you can play with.
 ```
 rails new --help
 ```
 
-All commands can run with -h or --help to list more information. Please feel free to experiment with them.
+All commands can run with -h or --help to list more information.
 
 
 # rails server
@@ -44,24 +45,27 @@ The server can be run on a different port using the -p option.
 
 The default development environment can be changed using -e.
 ```
-bin/rails server -e production -p 4000
+bundle exec rails server -e production -p 4000
 ```
 
 To check all other options run the command:
 ```
-bin/rails server --help
+bundle exec rails server --help
 ```
 
 # rails generate
 The rails generate command uses templates to create a whole lot of things. Running rails generate by itself gives a list of available generators:
+```
+bundle exec rails generate
+```
 
 You can also use the alias "g" to invoke the generator command: rails g.
 ```
-bin/rails generate
+bundle exec rails g
 ```
 
-Using generators will save you a large amount of time by writing boilerplate code, writing migrations for your database and other tasks.
-Generators are complex so we have dedicated another lessons to show how to work with them, checkot our generators and scaffolding lesson.
+Using generators will save you time with prewritten boilerplate code, writing migrations for your database and other tasks.
+Generators are complex so we have dedicated another lessons to show how to work with them, so be sure to review that lesson to learn more.
 
 
 # rails console
@@ -69,7 +73,7 @@ The console command lets you interact with your Rails application from the comma
 
 You can also use the alias "c" to invoke the console:
 ```
-bin/rails c
+bundle exec rails c
 ```
 
 For instance let's run some code here:
@@ -81,12 +85,12 @@ This code gets the directory where our application is installed. In this way we 
 
 You can also specify the environment in which the console command should operate.
 ```
-bin/rails console staging
+bundle exec rails console staging
 ```
 
 If you wish to test out some code without changing any data, you can do that by invoking:
 ```
-bin/rails console --sandbox.
+bundle exec rails console --sandbox.
 ```
 
 Any modifications you make in this mode will be rolled back on exit
@@ -96,29 +100,25 @@ rails dbconsole figures out which database you're using and drops you into the c
 
 You can also use the alias "db" to invoke the dbconsole.
 ```
-bin/rails db
+bundle exec rails db
 ```
-Here we can do execute any SQL:
+Here we can execute any SQL:
 ```
 show tables;
 ```
-And it works!
-
 
 # rails runner
 runner runs Ruby code in the context of Rails non-interactively. For instance:
 ```
-$ bin/rails runner "Rails.environment.to_s"
+bundle exec rails runner "Rails.environment.to_s"
 ```
 You can also use the alias "r" to invoke the runner: rails r.
 
 You can specify the environment in which the runner command should operate using the -e switch.
 ```
-$ bin/rails runner -e staging "Rails.environment.to_s"
+bundle exec rails runner -e staging "Rails.environment.to_s"
 ```
 
 
-This is all for this lesson. Please use some time playing with these commands, if your project gets destroyed, do not worry, delete it and create a new one with 'rails new'. Use the power of the command line!
-
-
+That's all for this lesson. Take some time playing with these commands in the RailsMania cloud environment. If your project gets destroyed, don't worry, delete it and create a new one with 'rails new'. 
 
