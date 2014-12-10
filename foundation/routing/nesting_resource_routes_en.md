@@ -1,10 +1,11 @@
+[wip]
 # Nested Resources
 It's common to have resources that are logically children of other resources. For example, suppose your application includes these models:
 
 class Magazine < ActiveRecord::Base
   has_many :ads
 end
- 
+
 class Ad < ActiveRecord::Base
   belongs_to :magazine
 end

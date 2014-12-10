@@ -1,3 +1,4 @@
+[wip]
 # Path and URL Helpers
 Creating a resourceful route will also expose a number of helpers to the controllers in your application. In the case of resources :photos:
 

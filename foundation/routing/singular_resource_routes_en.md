@@ -1,3 +1,4 @@
+[wip]
 # Singular Resources
 Sometimes, you have a resource that clients always look up without referencing an ID. For example, you would like /profile to always show the profile of the currently logged in user. In this case, you can use a singular resource to map /profile (rather than /profile/:id) to the show action:
 
