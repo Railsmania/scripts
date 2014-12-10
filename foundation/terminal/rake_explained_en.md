@@ -1,3 +1,4 @@
+[Jordi]
 # Rake
 Rake is Ruby Make, a standalone Ruby utility that replaces the Unix utility 'make', and uses a 'Rakefile' and .rake files to build up a list of tasks. In Rails, Rake is used for common administration tasks, especially sophisticated ones that build off of each other.
 
@@ -60,7 +61,7 @@ $ bin/rake notes
 app/controllers/admin/users_controller.rb:
   * [ 20] [TODO] any other way to do this?
   * [132] [FIXME] high priority for next deploy
- 
+
 app/models/school.rb:
   * [ 13] [OPTIMIZE] refactor this code to make it faster
   * [ 17] [FIXME]
@@ -70,7 +71,7 @@ $ bin/rake notes:fixme
 (in /home/foobar/commandsapp)
 app/controllers/admin/users_controller.rb:
   * [132] high priority for next deploy
- 
+
 app/models/school.rb:
   * [ 17]
 You can also use custom annotations in your code and list them using rake notes:custom by specifying the annotation using an environment variable ANNOTATION.
