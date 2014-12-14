@@ -1,44 +1,25 @@
 [Jordi]
 # Rake
-Rake is Ruby Make, a standalone Ruby utility that replaces the Unix utility 'make', and uses a 'Rakefile' and .rake files to build up a list of tasks. In Rails, Rake is used for common administration tasks, especially sophisticated ones that build off of each other.
+In this lesson we are going to talk about the gem Rake which is installed by default together with ruby. Rake is a standalone Ruby utility that replaces the Unix utility 'make'. It uses a 'Rakefile' and .rake files to build up a list of tasks.
 
-You can get a list of Rake tasks available to you, which will often depend on your current directory, by typing rake --tasks. Each task has a description, and should help you find the thing you need.
+In Rails, Rake is used for common administration tasks, especially sophisticated ones that build off of each other.
 
-To get the full backtrace for running rake task you can pass the option --trace to command line, for example rake db:create --trace.
+You can get a list of Rake tasks available to you, by typing rake --tasks. Each task has a description, and should help you find the thing you need.
 
-$ bin/rake --tasks
-rake about              # List versions of all Rails frameworks and the environment
-rake assets:clean       # Remove compiled assets
-rake assets:precompile  # Compile all the assets named in config.assets.precompile
-rake db:create          # Create the database from config/database.yml for the current Rails.env
-...
-rake log:clear          # Truncates all *.log files in log/ to zero bytes (specify which logs with LOGS=test,development)
-rake middleware         # Prints out your Rack middleware stack
-...
-rake tmp:clear          # Clear session, cache, and socket files from tmp/ (narrow w/ tmp:sessions:clear, tmp:cache:clear, tmp:sockets:clear)
-rake tmp:create         # Creates tmp directories for sessions, cache, sockets, and pids
-You can also use rake -T to get the list of tasks.
+```
+bundle exec rake --tasks
+```
+
+As we can see Rails comes with lots of tasks already. Let's explore these tasks. 	
 
 # about
-rake about gives information about version numbers for Ruby, RubyGems, Rails, the Rails subcomponents, your application's folder, the current Rails environment name, your app's database adapter, and schema version. It is useful when you need to ask for help, check if a security patch might affect you, or when you need some stats for an existing Rails installation.
+Let's execute the first of the tasks:
+```
+bundle exec rake about
+```
 
-$ bin/rake about
-About your application's environment
-Ruby version              1.9.3 (x86_64-linux)
-RubyGems version          1.3.6
-Rack version              1.3
-Rails version             4.1.4
-JavaScript Runtime        Node.js (V8)
-Active Record version     4.1.4
-Action Pack version       4.1.4
-Action View version       4.1.4
-Action Mailer version     4.1.4
-Active Support version    4.1.4
-Middleware                Rack::Sendfile, ActionDispatch::Static, Rack::Lock, #<ActiveSupport::Cache::Strategy::LocalCache::Middleware:0x007ffd131a7c88>, Rack::Runtime, Rack::MethodOverride, ActionDispatch::RequestId, Rails::Rack::Logger, ActionDispatch::ShowExceptions, ActionDispatch::DebugExceptions, ActionDispatch::RemoteIp, ActionDispatch::Reloader, ActionDispatch::Callbacks, ActiveRecord::Migration::CheckPending, ActiveRecord::ConnectionAdapters::ConnectionManagement, ActiveRecord::QueryCache, ActionDispatch::Cookies, ActionDispatch::Session::CookieStore, ActionDispatch::Flash, ActionDispatch::ParamsParser, Rack::Head, Rack::ConditionalGet, Rack::ETag
-Application root          /home/foobar/commandsapp
-Environment               development
-Database adapter          sqlite3
-Database schema version   20110805173523
+'rake about' gives version numbers for Ruby, RubyGems, Rails, the Rails subcomponents, will also show all the middlewares used in your application, your database adaptor and current schema version. This information is useful when you need to ask for help or need to check if a security patch might affect you.
+
 # assets
 You can precompile the assets in app/assets using rake assets:precompile and remove those compiled assets using rake assets:clean.
 
@@ -61,7 +42,7 @@ $ bin/rake notes
 app/controllers/admin/users_controller.rb:
   * [ 20] [TODO] any other way to do this?
   * [132] [FIXME] high priority for next deploy
-
+ 
 app/models/school.rb:
   * [ 13] [OPTIMIZE] refactor this code to make it faster
   * [ 17] [FIXME]
@@ -71,7 +52,7 @@ $ bin/rake notes:fixme
 (in /home/foobar/commandsapp)
 app/controllers/admin/users_controller.rb:
   * [132] high priority for next deploy
-
+ 
 app/models/school.rb:
   * [ 17]
 You can also use custom annotations in your code and list them using rake notes:custom by specifying the annotation using an environment variable ANNOTATION.
