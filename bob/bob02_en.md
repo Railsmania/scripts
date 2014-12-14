@@ -1,4 +1,4 @@
-## BDD with Cucumber and Capybara
+# BDD with Cucumber and Capybara
 Today, we'll add some fundamental automated testing tools so we can ensure we're delivering working features that do exactly what we wanted them to. If you're not familiar with Behavior Driven Development (often called BDD) or Test Driven Development, I encourage you to learn more about it by looking at this lesson's notes.
 
 In this lesson, we're going to keep it simple so you can follow along even if you're not familiar with BDD, so let's get started!
