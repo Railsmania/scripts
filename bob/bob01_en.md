@@ -1,3 +1,4 @@
+#Project bob adding bootstrap theme
 Today, we're going to create a new Rails application and deploy it to a public internet address. We believe in deploy early, deploy often, so we're going to automate the deployment process as much as possible using a Ruby gem called Capistrano.
 
 So, let's get started!

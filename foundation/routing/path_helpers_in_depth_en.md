@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 In this lesson we're going to learn about special methods in Rails applications called path helpers. Path helpers are used in various parts of your application's codebase, usually in controllers and views. When found in controllers, they are often used for redirecting a request to a different valid URL.
 
 For instance, in this example
@@ -10,6 +11,9 @@ end
 
 The path helper photos_path is a magic method that Rails provided us after it inspected the routes in our application.
 
+=======
+[wip]
+>>>>>>> eea78af3bfb4e59418676ff6b555bab212fc944f
 # Path and URL Helpers
 Simply creating a resourceful route will expose a number of these helpers to the controllers in an application. In the case of resources :photos:
 

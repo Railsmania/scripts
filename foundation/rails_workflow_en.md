@@ -1,3 +1,4 @@
+[Jordi]
 # Rails basic workflow
 
 In this lesson we are gonna explain the basic concepts of RubyonRails. Please watch this lesson before any other lessons if you are absolutely new to RubyonRails.

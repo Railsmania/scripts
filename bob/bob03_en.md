@@ -1,4 +1,4 @@
-# Omniauth + DigitalOcean Strategy
+# Open authentication in Rails
 
 In this lesson we're going to require users to authenticate before they can see the dashboard that we're working on.
 

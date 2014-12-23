@@ -1,3 +1,4 @@
+[wip]
 # Controller Namespaces, Scoping, and Sharing
 You may wish to organize groups of controllers under a namespace. Most commonly, you might group a number of administrative controllers under an Admin:: namespace. You would place these controllers under the app/controllers/admin directory, and you can group them together in your router:
 
@@ -49,21 +50,21 @@ Routing Concerns allows you to declare common routes that can be reused inside o
 concern :commentable do
   resources :comments
 end
- 
+
 concern :image_attachable do
   resources :images, only: :index
 end
 These concerns can be used in resources to avoid code duplication and share behavior across routes:
 
 resources :messages, concerns: :commentable
- 
+
 resources :posts, concerns: [:commentable, :image_attachable]
 The above is equivalent to:
 
 resources :messages do
   resources :comments
 end
- 
+
 resources :posts do
   resources :comments
   resources :images, only: :index
