@@ -1,5 +1,17 @@
+In this lesson we're going to learn about special methods in Rails applications called path helpers. Path helpers are used in various parts of your application's codebase, usually in controllers and views. When found in controllers, they are often used for redirecting a request to a different valid URL.
+
+For instance, in this example
+
+```
+def delete
+  redirect_to photos_path
+end
+```
+
+The path helper photos_path is a magic method that Rails provided us after it inspected the routes in our application.
+
 # Path and URL Helpers
-Creating a resourceful route will also expose a number of helpers to the controllers in your application. In the case of resources :photos:
+Simply creating a resourceful route will expose a number of these helpers to the controllers in an application. In the case of resources :photos:
 
 photos_path returns /photos
 new_photo_path returns /photos/new
@@ -29,3 +41,5 @@ For other actions, you just need to insert the action name as the first element 
 
 <%= link_to 'Edit Ad', [:edit, @magazine, @ad] %>
 This allows you to treat instances of your models as URLs, and is a key advantage to using the resourceful style.
+
+So, in this lesson we reviewed path_helpers and URL helpers. They both allow us to easily generate valid URLs for any of our application's routes, and they have a simple, straight-forward API for creating those URLs that are complicated with object IDs. You should definitely use path_helpers and url_helpers in your application to keep your view's and controller logic always in sync with your routing and data models.
