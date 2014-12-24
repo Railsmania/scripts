@@ -1,4 +1,4 @@
-[Jordi]
+[wip]
 # Rake
 In this lesson we are going to talk about the gem Rake which is installed by default together with ruby. Rake is a standalone Ruby utility that replaces the Unix utility 'make'. It uses a 'Rakefile' and .rake files to build up a list of tasks.
 
@@ -10,7 +10,7 @@ You can get a list of Rake tasks available to you, by typing rake --tasks. Each 
 bundle exec rake --tasks
 ```
 
-As we can see Rails comes with lots of tasks already. Let's explore these tasks. 	
+As we can see Rails comes with lots of tasks already. Let's explore a few of these tasks. 	
 
 # about
 Let's execute the first of the tasks:
@@ -20,81 +20,24 @@ bundle exec rake about
 
 'rake about' gives version numbers for Ruby, RubyGems, Rails, the Rails subcomponents, will also show all the middlewares used in your application, your database adaptor and current schema version. This information is useful when you need to ask for help or need to check if a security patch might affect you.
 
-# assets
-You can precompile the assets in app/assets using rake assets:precompile and remove those compiled assets using rake assets:clean.
-
 # db
-The most common tasks of the db: Rake namespace are migrate and create, and it will pay off to try out all of the migration rake tasks (up, down, redo, reset). rake db:version is useful when troubleshooting, telling you the current version of the database.
+The most common rake tasks used in Rails applications are found in the db: Rake namespace. You'll use migrate regularly, but it'll definitely pay off to try out all of the migration rake tasks (up, down, redo, reset).
 
-More information about migrations can be found in the Migrations guide.
+Since the database rake commands are so important to Rails development, we've prepared another more in-depth series of lessons specifically about them - so be sure to watch those to learn more.
 
-# doc
-The doc: namespace has the tools to generate documentation for your app, API documentation, guides. Documentation can also be stripped which is mainly useful for slimming your codebase, like if you're writing a Rails application for an embedded platform.
-
-rake doc:app generates documentation for your application in doc/app.
-rake doc:guides generates Rails guides in doc/guides.
-rake doc:rails generates API documentation for Rails in doc/api.
-# notes
-rake notes will search through your code for comments beginning with FIXME, OPTIMIZE or TODO. The search is done in files with extension .builder, .rb, .erb, .haml and .slim for both default and custom annotations.
-
-$ bin/rake notes
-(in /home/foobar/commandsapp)
-app/controllers/admin/users_controller.rb:
-  * [ 20] [TODO] any other way to do this?
-  * [132] [FIXME] high priority for next deploy
- 
-app/models/school.rb:
-  * [ 13] [OPTIMIZE] refactor this code to make it faster
-  * [ 17] [FIXME]
-If you are looking for a specific annotation, say FIXME, you can use rake notes:fixme. Note that you have to lower case the annotation's name.
-
-$ bin/rake notes:fixme
-(in /home/foobar/commandsapp)
-app/controllers/admin/users_controller.rb:
-  * [132] high priority for next deploy
- 
-app/models/school.rb:
-  * [ 17]
-You can also use custom annotations in your code and list them using rake notes:custom by specifying the annotation using an environment variable ANNOTATION.
-
-$ bin/rake notes:custom ANNOTATION=BUG
-(in /home/foobar/commandsapp)
-app/models/post.rb:
-  * [ 23] Have to fix this one before pushing!
-When using specific annotations and custom annotations, the annotation name (FIXME, BUG etc) is not displayed in the output lines.
-
-By default, rake notes will look in the app, config, lib, bin and test directories. If you would like to search other directories, you can provide them as a comma separated list in an environment variable SOURCE_ANNOTATION_DIRECTORIES.
-
-$ export SOURCE_ANNOTATION_DIRECTORIES='spec,vendor'
-$ bin/rake notes
-(in /home/foobar/commandsapp)
-app/models/user.rb:
-  * [ 35] [FIXME] User should have a subscription at this point
-spec/models/user_spec.rb:
-  * [122] [TODO] Verify the user that has a subscription works
 # routes
-rake routes will list all of your defined routes, which is useful for tracking down routing problems in your app, or giving you a good overview of the URLs in an app you're trying to get familiar with.
+Likewise, rake routes is a very important tool for Rails developers when dealing with application routing. This rake task will inspect your application and will list all of its defined routes. This task is useful for tracking down routing problems in your app, or giving you a good overview of the URLs in an app you're trying to get familiar with.
 
-# test
-A good description of unit testing in Rails is given in A Guide to Testing Rails Applications
-
-Rails comes with a test suite called Minitest. Rails owes its stability to the use of tests. The tasks available in the test: namespace helps in running the different tests you will hopefully write.
-
-# tmp
-The Rails.root/tmp directory is, like the *nix /tmp directory, the holding place for temporary files like sessions (if you're using a file store for files), process id files, and cached actions.
-
-The tmp: namespaced tasks will help you clear and create the Rails.root/tmp directory:
-
-rake tmp:cache:clear clears tmp/cache.
-rake tmp:sessions:clear clears tmp/sessions.
-rake tmp:sockets:clear clears tmp/sockets.
-rake tmp:clear clears all the three: cache, sessions and sockets.
-rake tmp:create creates tmp directories for sessions, cache, sockets, and pids.
 # Miscellaneous
-rake stats is great for looking at statistics on your code, displaying things like KLOCs (thousands of lines of code) and your code to test ratio.
-rake secret will give you a pseudo-random key to use for your session secret.
-rake time:zones:all lists all the timezones Rails knows about.
+A couple miscellaneous tasks here that we'll mention are "rake tasks" and "rake secret"
+
+"rake tasks" can be used for looking at some basic application code statistics, running it will display things information such as KLOCs, thousands of lines of code, and your code to test ratio.
+
+"rake secret" will give you a pseudo-random key that you can use for your session secret.
+
 # Custom Rake Tasks
+It's also possible to write your own rake tasks for your application.
+
 Custom rake tasks have a .rake extension and are placed in Rails.root/lib/tasks. You can create these custom rake tasks with the bin/rails generate task command.
 
 desc "I am short, but comprehensive description for my cool task"
@@ -120,4 +63,6 @@ Invocation of the tasks will look like:
 $ bin/rake task_name
 $ bin/rake "task_name[value 1]" # entire argument string should be quoted
 $ bin/rake db:nothing
+
 If your need to interact with your application models, perform database queries and so on, your task should depend on the environment task, which will load your application code.
+
