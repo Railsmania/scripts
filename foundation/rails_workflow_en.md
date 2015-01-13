@@ -5,16 +5,22 @@ In this lesson we are going to explain the basic concepts of RubyonRails. Please
 
 RubyOnRails is built using the Ruby language. You do not need to learn to program using Ruby in general right now though. Most of the code you will be creating on the first few lessons is limited by Rails conventions, we recommend to watch our videos and understand how to make simple things with Rails before going deeper into the Ruby language.
 
-RubyOnRails is used to program server software to create websites or to power web APIs.
+RubyOnRails is mainly used to program server software to create websites or to power web APIs. 
 
 RubyOnRails follows a pattern called MVC for Model-View-Controller. This pattern encourages the separation of concerns which usually makes your application easier to write and easier to maintain.
 Let's talk about the three parts of the MVC pattern.
 
-The first part, the model has the business logic of your application and its data. Most of the code of your application would be written here. Models abstract data and operations on that data. For instance, if you were building Facebook, you would have a model for user, a model for post, etc. A user would be able post information and a post could be liked, etc. But models never have an UI. 
+The first part, the model has the business logic of your application. Most of the code of your application would be written here. Models also abstract data and operations on that data. For instance, if you were building Facebook, you would have a model for user, a model for post, etc. A user would be able post information and a post could be liked, etc. But models never have an UI. 
 
 The second part, the View is the UI the user interacts with. In the case of websites, we ultimately want HTML. Views in RubyonRails are templates which after being processed will generate HTML. Views use models to fill the templates but should not understand anything about the business logic. For instance a view may use the name of the user to write it on top-right of the HTML page but does not really know where the name comes from (maybe straight from a database, maybe preprocessed, etc.)
 
-The third component is the Controller, the controller takes care of the request. In the case of RubyOnRails, this is a HTTP request. In general the browser will either make a GET request for information from the server or POST some information to the server. In the case of making a GET request to the server, the controller will retrieve data using a model and pass it to the view. The view will render with that data. Finally the controller will pass the rendered HTML back to the user's browser.
+The third component is the Controller, the controller takes care of the request. In the case of RubyOnRails, this is a HTTP request. Let's see what happens in the most common case: a HTTP GET request.
+
+First, the GET request comes to a URL and that gets to our controller.
+Now typically the controller will retrieve data using a model.
+This data will be passed to the view. 
+The view will render with that data. 
+And finally the controller will pass the rendered HTML back to the user's browser.
 For instance if you try to see a profile, the controller will use the User model to find the information of the user, and pass it to the user's profile template which will render the HTML with the profile of that user.
 
 This is the MVC pattern used by RubyOnRails and many other web frameworks. This pattern is also common outside web programming so it is very useful to know it well.
