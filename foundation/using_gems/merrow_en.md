@@ -1,18 +1,15 @@
-Hi,
-
-In this lesson we are going to talk about about a gem called Merrow.
+In this lesson we're going to showcase how to use a nifty utility gem called Merrow.
 Ruby is a general programming language with many uses outside Rails. Merrow and many other gems provide us utilities for our system.
 
-First let's install the Merrow gem, as we want to install it in our system and it is not project specific, let's use the command 'gem install':
+First let's install the Merrow gem. Since this particular gem is not installed for any specific project, let's use the command 'gem install' instead of adding it to a gemfile and installing it with bundler.
 
 ```
 gem install merrow
 ```
 
-This takes a while.
-Merrow is an utility which scan a list of repositories and returns a list of pull requests which are open on those repositories. This will save you a lot of time when you are developing several projects and do not want to manually check every one of them.
+Merrow is a utility which scans a list of Github repositories and returns a list of pull requests which are open on those repositories. This will save you a lot of time when you are developing several projects and do not want to manually check every one of them.
 
-Once Merrow is installed, let's execute it by simply writing:
+Now that Merrow is installed, let's see how it works by executing:
 ```
 merrow
 ```
@@ -26,17 +23,14 @@ This information will not be stored but Merrow will create a token with just the
 We can see that Merrow has created a Token for us.
 
 Let's execute merrow again.
-It checks the pull request for the project we set-up and there was none.
-Let's check some more projects.
+It checks for open pull requests for the project we set-up but there weren't any.
+So let's add some more projects for it to check.
 Merrow stores its configuration in ~/.merrow.yml. Let's edit that file:
 
 This file already has the repository we are checking and the token Merrow created for us.
 We can add any number of repositories here, let's add the repository for rspec
 
-Now we execute merrow again and sure again there is a pull requests open for that project!
+Now we execute merrow again and sure enough there is a pull requests open for that project!
 The more projects you want to check the more useful merrow will be for you!
 
-There are many Ruby tools you can install, in fact there are two you probably already has installed!
-The 'rails' tool which can be used to create new rails projects (among other functionalities) and the 'rake' tool which is a ruby tool to execute tasks.
-
-In Railsmania we will show you other tools to improve your system and make you more efficient in your work.
+That's it for this lesson. Be on the lookout for more lessons like this on RailsMania.com that demonstrate other useful gems.
